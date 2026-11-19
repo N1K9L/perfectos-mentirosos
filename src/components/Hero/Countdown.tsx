@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { Clock, Calendar } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Clock, Pencil } from 'lucide-react';
 import { useCountdown } from '../../hooks/useLocalStorage';
 
 const STORAGE_KEY = 'nikotana_callTime';
@@ -57,43 +57,40 @@ export default function Countdown() {
       transition={{ delay: 1.1, duration: 0.8 }}
     >
       {/* Event Banner */}
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#881337]/30 border border-[#D4AF37]/40 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-        <Calendar className="w-3.5 h-3.5 text-[#F0D978]" />
-        <span className="font-jakarta text-xs font-semibold text-[#F1F5F9] tracking-wider uppercase">
-          Estreno Oficial: 20 de Noviembre de 2026 · Prime Video
-        </span>
-      </div>
+      <span className="font-jakarta text-xs sm:text-sm text-[#94A3B8] tracking-wide">
+        Estreno · 20 de noviembre · Prime Video
+      </span>
 
       {/* Countdown Cards */}
-      <div className="flex items-center justify-center gap-3 sm:gap-6 w-full">
+      <div className="flex items-center justify-center gap-2 sm:gap-4 w-full">
         {units.map((unit, idx) => (
-          <div key={unit.label} className="flex items-center gap-3 sm:gap-6">
+          <div key={unit.label} className="flex items-center gap-2 sm:gap-4">
             <div className="flex flex-col items-center space-y-2.5">
               {/* Luxury Digital Card */}
-              <div className="relative w-18 h-24 sm:w-28 sm:h-32 rounded-3xl overflow-hidden border border-[#D4AF37]/50 shadow-[0_12px_30px_rgba(0,0,0,0.85),0_0_25px_rgba(212,175,55,0.2)] bg-gradient-to-b from-[#141A24] via-[#0D1117] to-[#07070A] group">
-                {/* Horizontal split groove */}
-                <div className="absolute top-1/2 left-0 right-0 h-px bg-[#D4AF37]/25 z-10" />
-
-                {/* Top glossy reflection */}
-                <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
-
-                {/* Numerical display */}
-                <div className="relative z-20 w-full h-full flex items-center justify-center">
-                  <span className="font-cinzel text-3xl sm:text-5xl font-black text-[#F0D978] drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] tabular-nums">
+              <div className="relative w-16 h-20 sm:w-24 sm:h-28 rounded-2xl overflow-hidden glass flex items-center justify-center">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.span
+                    key={unit.value}
+                    initial={{ y: '-100%', opacity: 0 }}
+                    animate={{ y: '0%', opacity: 1 }}
+                    exit={{ y: '100%', opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="font-cinzel text-3xl sm:text-5xl font-semibold text-[#F0D978] tabular-nums"
+                  >
                     {String(unit.value).padStart(2, '0')}
-                  </span>
-                </div>
+                  </motion.span>
+                </AnimatePresence>
               </div>
 
               {/* High Contrast Label */}
-              <span className="font-jakarta text-[11px] sm:text-xs font-bold text-[#E2E8F0] uppercase tracking-[0.2em]">
+              <span className="font-jakarta text-[10px] sm:text-[11px] font-medium text-[#94A3B8] uppercase tracking-[0.22em]">
                 {unit.label}
               </span>
             </div>
 
             {/* Glowing Colon */}
             {idx < units.length - 1 && (
-              <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#D4AF37] -mt-8 animate-pulse select-none">
+              <span className="font-cinzel text-xl sm:text-3xl text-[#D4AF37]/40 -mt-7 select-none">
                 :
               </span>
             )}
@@ -102,7 +99,7 @@ export default function Countdown() {
       </div>
 
       {/* Interactive Videocall Time Pill */}
-      <div className="flex items-center gap-3 px-4 py-2 rounded-2xl glass border border-[#D4AF37]/30 shadow-lg">
+      <div className="flex items-center gap-3 px-4 py-2 rounded-full glass">
         <Clock className="w-4 h-4 text-[#FDA4AF]" />
         <span className="font-jakarta text-xs text-[#CBD5E1]">
           Hora acordada de videollamada:
@@ -120,10 +117,10 @@ export default function Countdown() {
         ) : (
           <button
             onClick={() => setIsEditing(true)}
-            className="font-jakarta text-xs font-bold text-[#F0D978] hover:text-white underline underline-offset-4 decoration-[#D4AF37]/60 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 font-jakarta text-xs font-semibold text-[#F0D978] hover:text-white transition-colors cursor-pointer"
             title="Toca para ajustar la hora"
           >
-            {callTime} hrs ✏️
+            {callTime} h <Pencil className="w-3 h-3" />
           </button>
         )}
       </div>

@@ -23,12 +23,6 @@
   --font-jakarta: 'Plus Jakarta Sans', sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html {
   scroll-behavior: smooth;
   background-color: #07070A;
@@ -44,7 +38,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -52,7 +46,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #A88A2A;
+  background: #2A2F3A;
   border-radius: 4px;
 }
 
@@ -77,23 +71,9 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Gold shimmer animation */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
+/* Gold text — static, clean */
 .gold-shimmer {
-  background: linear-gradient(
-    90deg,
-    #A88A2A 0%,
-    #F0D978 25%,
-    #D4AF37 50%,
-    #F0D978 75%,
-    #A88A2A 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 4s linear infinite;
+  background: linear-gradient(180deg, #F0D978 0%, #D4AF37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -103,36 +83,13 @@ body {
   position: relative;
 }
 
-.gold-border-shimmer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: linear-gradient(
-    135deg,
-    #A88A2A,
-    #F0D978,
-    #D4AF37,
-    #F0D978,
-    #A88A2A
-  );
-  background-size: 200% 200%;
-  animation: shimmer 4s linear infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  pointer-events: none;
-}
-
 /* Wax seal animation */
 @keyframes sealPulse {
   0%, 100% {
     box-shadow: 0 0 15px rgba(136, 19, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(136, 19, 55, 0.9), 0 0 50px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 22px rgba(136, 19, 55, 0.7), inset 0 0 12px rgba(212, 175, 55, 0.35);
   }
 }
 
@@ -172,30 +129,55 @@ body {
   animation: holoShift 7s ease infinite;
 }
 
-/* High-Contrast Luxury Glass Components */
+/* Clean surfaces */
 .glass {
-  background: rgba(13, 17, 23, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(13, 17, 23, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-dark {
-  background: rgba(7, 7, 10, 0.92);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(7, 7, 10, 0.78);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .luxury-card {
-  background: linear-gradient(145deg, rgba(16, 21, 30, 0.85) 0%, rgba(10, 13, 18, 0.95) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(212, 175, 55, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(13, 17, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 20px 40px -24px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .luxury-card:hover {
-  border-color: rgba(212, 175, 55, 0.6);
-  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(212, 175, 55, 0.25);
+  border-color: rgba(212, 175, 55, 0.28);
+  background: rgba(16, 21, 30, 0.78);
+}
+
+/* Accessible focus */
+:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+button, a, [role="tab"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

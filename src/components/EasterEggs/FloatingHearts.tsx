@@ -13,14 +13,14 @@ interface GlowParticle {
 export const FloatingHearts: React.FC = () => {
   const particles = useMemo<GlowParticle[]>(() => {
     const colors = ['#D4AF37', '#F0D978', '#FDA4AF', '#BE185D', '#FFFFFF'];
-    return Array.from({ length: 16 }).map((_, i) => ({
+    return Array.from({ length: 7 }).map((_, i) => ({
       id: i,
-      left: `${(i * 6.2 + 3) % 94}%`,
+      left: `${(i * 13.7 + 5) % 94}%`,
       size: Math.floor(Math.random() * 8 + 10),
       duration: Math.floor(Math.random() * 8 + 12),
       delay: Math.floor(Math.random() * 6),
       color: colors[Math.floor(Math.random() * colors.length)],
-      opacity: Math.random() * 0.35 + 0.15,
+      opacity: Math.random() * 0.2 + 0.1,
     }));
   }, []);
 
@@ -55,10 +55,10 @@ export const FloatingHearts: React.FC = () => {
             opacity: 0;
           }
           20% {
-            opacity: 0.4;
+            opacity: 0.22;
           }
           80% {
-            opacity: 0.4;
+            opacity: 0.22;
           }
           100% {
             transform: translateY(-110vh) rotate(35deg) scale(1.1);

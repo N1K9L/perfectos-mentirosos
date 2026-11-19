@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { timelineData } from './TimelineData';
 import TimelineMonth from './TimelineMonth';
+import SectionHeader from '../Shared/SectionHeader';
 import { AnniversaryLetter } from './AnniversaryLetter';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,19 +21,19 @@ export const TimelineSection: React.FC = () => {
           card,
           {
             opacity: 0,
-            y: 50,
-            scale: 0.95,
+            y: 40,
+            filter: 'blur(6px)',
           },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.8,
+            filter: 'blur(0px)',
+            duration: 0.9,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
-              toggleActions: 'play none none reverse',
+              once: true,
             },
           }
         );
@@ -51,11 +52,11 @@ export const TimelineSection: React.FC = () => {
             scale: 1,
             opacity: 1,
             duration: 0.5,
-            ease: 'back.out(2)',
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: node,
               start: 'top 85%',
-              toggleActions: 'play none none reverse',
+              once: true,
             },
           }
         );
@@ -82,7 +83,7 @@ export const TimelineSection: React.FC = () => {
     <section
       id="timeline"
       ref={sectionRef}
-      className="relative min-h-screen py-28 sm:py-40 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       {/* Romantic transition background: Constellations & Warm glows */}
       <div className="absolute inset-0 pointer-events-none">
@@ -116,22 +117,11 @@ export const TimelineSection: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center space-y-6 mb-24 sm:mb-28">
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-[#881337]/30 border border-[#881337]/50 text-[#FDA4AF] text-xs sm:text-sm uppercase tracking-widest font-jakarta font-semibold shadow-lg">
-            <span>Capítulo Final</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-            <span>Nuestra Línea del Tiempo</span>
-          </div>
-
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wider gold-shimmer">
-            NUESTRA HISTORIA
-          </h2>
-
-          <p className="font-playfair text-lg sm:text-2xl text-[#FDA4AF] italic max-w-2xl mx-auto leading-relaxed">
-            10 meses juntos — cada día, cada risa y cada batalla valió la pena 💛
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Capítulo final"
+          title="Nuestra Historia"
+          subtitle="10 meses juntos. Cada día, cada risa y cada batalla valió la pena."
+        />
 
         {/* Timeline Months Container */}
         <div ref={containerRef} className="relative">

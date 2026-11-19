@@ -29,22 +29,26 @@ export const KissCounter: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-40">
+    <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40">
       <div className="relative">
         <motion.button
           onClick={handleClick}
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.92 }}
-          className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-[#0D1117]/90 border border-[#881337]/70 hover:border-[#FDA4AF] text-white shadow-[0_5px_20px_rgba(136,19,55,0.4)] backdrop-blur-md cursor-pointer group transition-all"
+          aria-label={`Enviar un besito (${kissCount})`}
+          className="relative flex items-center gap-2.5 p-1.5 sm:pl-1.5 sm:pr-4 rounded-full glass-dark text-white cursor-pointer group transition-colors hover:border-[#FDA4AF]/40"
         >
-          <div className="w-7 h-7 rounded-full bg-[#881337]/50 flex items-center justify-center">
+          <div className="relative w-9 h-9 rounded-full bg-[#881337]/40 flex items-center justify-center">
             <Heart className="w-4 h-4 text-[#FDA4AF] fill-current group-hover:scale-125 transition-transform" />
           </div>
-          <div className="flex flex-col text-left">
-            <span className="text-[9px] uppercase font-jakarta text-[#FDA4AF] tracking-widest font-bold leading-none">
+          <span className="sm:hidden absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-[#F0D978] text-[#07070A] text-[10px] font-jakarta font-bold flex items-center justify-center">
+            {kissCount}
+          </span>
+          <div className="hidden sm:flex flex-col text-left gap-0.5">
+            <span className="text-[10px] uppercase font-jakarta text-[#FDA4AF]/80 tracking-[0.18em] font-semibold leading-none">
               Besitos Virtuales
             </span>
-            <span className="font-cinzel text-xs font-bold text-[#F0D978]">
+            <span className="font-jakarta text-xs font-semibold text-[#F0D978]">
               {kissCount} para ti
             </span>
           </div>

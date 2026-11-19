@@ -22,38 +22,36 @@ export default function CollapsibleCard({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div
-      className={`luxury-card rounded-[28px] transition-all duration-300 border border-[#D4AF37]/30 hover:border-[#D4AF37]/80 shadow-[0_15px_40px_rgba(0,0,0,0.5)] ${className}`}
-    >
+    <div className={`luxury-card rounded-3xl ${className}`}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-4 p-6 sm:p-8 md:p-9 text-left cursor-pointer group"
+        aria-expanded={isOpen}
+        className="flex w-full items-center justify-between gap-4 p-6 sm:p-8 text-left cursor-pointer group"
       >
-        <div className="flex items-center gap-4 sm:gap-5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F0D978] group-hover:scale-105 group-hover:bg-[#D4AF37]/25 transition-all shrink-0 shadow-md">
-            <Icon className="h-6 w-6 shrink-0" />
+        <div className="flex items-center gap-4 min-w-0">
+          <div className="w-11 h-11 rounded-2xl bg-[#D4AF37]/10 flex items-center justify-center text-[#F0D978] shrink-0 transition-colors group-hover:bg-[#D4AF37]/20">
+            <Icon className="h-5 w-5" strokeWidth={1.6} />
           </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-4">
-            <span className="font-cinzel text-lg sm:text-xl md:text-2xl font-bold tracking-wide text-white group-hover:text-[#F0D978] transition-colors">
-              {title}
-            </span>
+          <div className="min-w-0">
             {badge && (
-              <span className="font-jakarta text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-[#881337]/40 text-[#FDA4AF] border border-[#881337]/60 w-fit shrink-0">
+              <span className="block font-jakarta text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FDA4AF]/80 mb-1">
                 {badge}
               </span>
             )}
+            <span className="block font-cinzel text-lg sm:text-xl font-semibold tracking-wide text-white">
+              {title}
+            </span>
           </div>
         </div>
 
-        <motion.div
+        <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.35, ease: 'easeInOut' }}
-          className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-[#F0D978] group-hover:border-[#D4AF37]/60 group-hover:bg-[#D4AF37]/10 transition-colors shrink-0 ml-2"
+          transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+          className="w-9 h-9 rounded-full flex items-center justify-center text-[#94A3B8] group-hover:text-[#F0D978] group-hover:bg-white/5 transition-colors shrink-0"
         >
           <ChevronDown className="h-5 w-5" />
-        </motion.div>
+        </motion.span>
       </button>
 
       <AnimatePresence initial={false}>
@@ -63,12 +61,10 @@ export default function CollapsibleCard({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <div className="px-6 sm:px-10 md:px-12 pb-10 sm:pb-12 pt-6 md:pt-8 border-t border-white/10 space-y-8">
-              {children}
-            </div>
+            <div className="px-6 sm:px-10 pb-10 pt-2 space-y-8">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
-import { ChevronDown, Sparkles } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import ParticleField from './ParticleField';
 import TagusEmblem from './TagusEmblem';
 import AvatarRing from './AvatarRing';
@@ -46,41 +46,58 @@ export default function HeroSection() {
       <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#07070A] to-transparent pointer-events-none z-[2]" />
 
       {/* Overlay Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6 max-w-4xl mx-auto my-auto text-center space-y-8">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6 max-w-4xl mx-auto my-auto text-center space-y-10">
         {/* Top Tagus Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#881337]/30 border border-[#D4AF37]/40 shadow-[0_0_20px_rgba(212,175,55,0.2)]"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center gap-3"
         >
-          <Sparkles className="w-3.5 h-3.5 text-[#F0D978]" />
-          <span className="font-cinzel text-xs font-bold text-white tracking-[0.2em] uppercase">
-            UNIVERSIDAD TAGUS · EXPEDIENTE NO. 10
+          <span className="hidden sm:block h-px w-8 bg-[#D4AF37]/50" />
+          <span className="font-jakarta text-[10px] sm:text-xs font-semibold text-[#D4AF37] tracking-[0.2em] sm:tracking-[0.3em] uppercase whitespace-nowrap">
+            Universidad Tagus · Expediente 10
           </span>
+          <span className="hidden sm:block h-px w-8 bg-[#D4AF37]/50" />
         </motion.div>
 
         {/* Avatar Ring */}
         <AvatarRing />
 
         {/* Title & Subtitle */}
-        <div className="space-y-3 max-w-2xl mx-auto">
-          <motion.h1
-            className="font-cinzel text-3xl sm:text-5xl lg:text-6xl font-black text-center gold-shimmer leading-tight tracking-wide drop-shadow-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            Bienvenido a Tagus, Aitana
-          </motion.h1>
+        <div className="space-y-5 max-w-3xl mx-auto">
+          <h1 className="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-semibold text-center text-white leading-[1.1] tracking-wide">
+            {['Bienvenido', 'a', 'Tagus,'].map((w, i) => (
+              <span key={w} className="inline-block overflow-hidden align-bottom pb-1">
+                <motion.span
+                  className="inline-block"
+                  initial={{ y: '110%' }}
+                  animate={{ y: '0%' }}
+                  transition={{ delay: 0.35 + i * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {w}&nbsp;
+                </motion.span>
+              </span>
+            ))}
+            <span className="inline-block overflow-hidden align-bottom pb-1">
+              <motion.span
+                className="inline-block gold-shimmer"
+                initial={{ y: '110%' }}
+                animate={{ y: '0%' }}
+                transition={{ delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Aitana
+              </motion.span>
+            </span>
+          </h1>
 
           <motion.p
-            className="font-playfair text-lg sm:text-2xl text-[#FDA4AF] text-center italic drop-shadow"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            className="font-playfair text-lg sm:text-2xl text-[#FDA4AF]/90 text-center italic"
+            initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ delay: 0.85, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            Nuestra cita de estreno &amp; 10 meses juntos 💛
+            Nuestra cita de estreno y 10 meses juntos
           </motion.p>
         </div>
 
@@ -98,8 +115,8 @@ export default function HeroSection() {
             next?.scrollIntoView({ behavior: 'smooth' });
           }}
         >
-          <span className="font-jakarta text-[11px] text-[#CBD5E1] uppercase tracking-[0.25em] font-semibold">
-            Explorar Expediente
+          <span className="font-jakarta text-[11px] text-[#94A3B8] uppercase tracking-[0.25em] font-medium">
+            Explorar
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

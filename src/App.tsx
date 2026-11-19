@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import HeroSection from './components/Hero/HeroSection';
 import DossierSection from './components/Dossier/DossierSection';
 import CommandCenterSection from './components/CommandCenter/CommandCenterSection';
@@ -22,10 +23,11 @@ export default function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="relative min-h-screen bg-[#07070A] text-[#F1F5F9] selection:bg-[#D4AF37] selection:text-[#07070A] overflow-x-hidden">
       {/* Background ambient lighting */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-b from-[#881337]/15 via-[#D4AF37]/5 to-transparent blur-[140px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-b from-[#881337]/10 via-[#D4AF37]/[0.03] to-transparent blur-[140px]" />
       </div>
 
       {/* State Importer for magic link ?state=... */}
@@ -102,12 +104,12 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 py-12 border-t border-[#D4AF37]/20 text-center space-y-2 bg-[#07070A]/80 backdrop-blur-md">
-        <p className="font-cinzel text-sm sm:text-base font-semibold text-[#D4AF37] tracking-wider">
+      <footer className="relative z-10 pt-16 pb-28 border-t border-white/[0.06] text-center space-y-3">
+        <p className="font-cinzel text-sm sm:text-base font-semibold text-[#D4AF37] tracking-[0.2em]">
           NIKOL &amp; AITANA · 10 MESES
         </p>
-        <p className="font-jakarta text-xs text-[#CBD5E1]">
-          Perfectos Mentirosos Premiere Night · Hecho con todo mi amor para ti 💛
+        <p className="font-jakarta text-xs text-[#94A3B8]">
+          Perfectos Mentirosos · Hecho con todo mi amor para ti
         </p>
         <p className="font-mono text-[10px] text-[#64748B] pt-2">
           nikotana.github.io · 2026
@@ -120,5 +122,6 @@ export default function App() {
       {/* Floating Share Button (Bottom-Right) */}
       <ShareButton />
     </div>
+    </MotionConfig>
   );
 }

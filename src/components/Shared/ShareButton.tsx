@@ -46,15 +46,16 @@ export const ShareButton: React.FC = () => {
   return (
     <>
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
         <motion.button
           onClick={handleOpen}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}
-          className="flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F0D978] to-[#D4AF37] text-[#07070A] font-jakarta font-bold text-sm shadow-[0_5px_25px_rgba(212,175,55,0.5)] cursor-pointer group hover:shadow-[0_8px_30px_rgba(212,175,55,0.7)] transition-all"
+          className="flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full bg-[#F0D978] text-[#07070A] font-jakarta font-semibold text-sm shadow-[0_10px_30px_-10px_rgba(212,175,55,0.6)] cursor-pointer group transition-colors hover:bg-white"
         >
           <Send className="w-4 h-4 text-[#07070A] group-hover:rotate-12 transition-transform" />
-          <span>Enviar elecciones 💌</span>
+          <span className="sm:hidden">Enviar</span>
+          <span className="hidden sm:inline">Enviar elecciones</span>
         </motion.button>
       </div>
 
