@@ -106,7 +106,7 @@ export default function App() {
         <p className="font-cinzel text-sm sm:text-base font-semibold text-[#D4AF37] tracking-wider">
           NIKOL &amp; AITANA · 10 MESES
         </p>
-        <p className="font-jakarta text-xs text-[#94A3B8]">
+        <p className="font-jakarta text-xs text-[#CBD5E1]">
           Perfectos Mentirosos Premiere Night · Hecho con todo mi amor para ti 💛
         </p>
         <p className="font-mono text-[10px] text-[#64748B] pt-2">

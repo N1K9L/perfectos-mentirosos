@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { Ticket, Sparkles, CheckCircle2 } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export default function VIPTicket() {
-  const [ticketTime, setTicketTime] = useLocalStorage<string>('ticketTime', '');
+  const [ticketTime, setTicketTime] = useLocalStorage<string>('ticketTime', '2026-11-20T20:30');
   const [ticketConfirmed, setTicketConfirmed] = useLocalStorage<boolean>(
     'ticketConfirmed',
     false
@@ -27,17 +28,17 @@ export default function VIPTicket() {
   const handleConfirm = () => {
     setTicketConfirmed(true);
     confetti({
-      particleCount: 150,
-      spread: 80,
+      particleCount: 160,
+      spread: 90,
       origin: { y: 0.6 },
       colors: ['#D4AF37', '#F0D978', '#881337', '#FDA4AF', '#FFFFFF'],
     });
   };
 
   return (
-    <div className="flex flex-col items-center space-y-6">
-      {/* 3D Ticket */}
-      <div style={{ perspective: '1000px' }} className="w-full max-w-md">
+    <div className="flex flex-col items-center space-y-8 pt-2">
+      {/* 3D Ticket Container */}
+      <div style={{ perspective: '1200px' }} className="w-full max-w-lg">
         <motion.div
           ref={cardRef}
           onMouseMove={handleMouseMove}
@@ -46,103 +47,114 @@ export default function VIPTicket() {
             rotateX: tilt.x,
             rotateY: tilt.y,
           }}
-          transition={{ type: 'spring', stiffness: 150, damping: 20 }}
-          className="relative w-full holographic rounded-2xl overflow-hidden border border-gold/30"
-          style={{
-            transformStyle: 'preserve-3d',
-            background:
-              'linear-gradient(135deg, #0D1117 0%, #1a1a2e 30%, #0D1117 60%, #1a1a2e 100%)',
-          }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          className="relative w-full holographic rounded-3xl overflow-hidden border-2 border-[#D4AF37] shadow-[0_15px_40px_rgba(0,0,0,0.8),0_0_30px_rgba(212,175,55,0.25)] bg-[#0A0D14]"
+          style={{ transformStyle: 'preserve-3d' }}
         >
-          {/* Ticket perforation line */}
-          <div className="absolute right-16 top-0 bottom-0 border-r-2 border-dashed border-gold/20" />
+          {/* Ticket Perforations / Notches */}
+          <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#07070A] border border-[#D4AF37]/50 z-20" />
+          <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#07070A] border border-[#D4AF37]/50 z-20" />
 
-          {/* Main ticket content */}
-          <div className="p-6 sm:p-8 pr-20 space-y-4">
-            {/* Header */}
-            <div className="space-y-1">
-              <p className="font-cinzel text-xs tracking-[0.3em] text-text-muted uppercase">
-                Pase VIP
-              </p>
-              <h3 className="font-cinzel text-gold text-lg sm:text-xl tracking-wider gold-shimmer">
+          {/* Ticket Header Ribbon */}
+          <div className="bg-gradient-to-r from-[#881337] via-[#5B0820] to-[#881337] px-6 py-3 border-b border-[#D4AF37]/40 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Ticket className="w-4 h-4 text-[#F0D978]" />
+              <span className="font-cinzel text-xs font-bold text-white tracking-widest uppercase">
+                Tagus Cinema · Pase VIP de Estreno
+              </span>
+            </div>
+            <span className="font-mono text-[10px] text-[#FDA4AF] tracking-widest font-bold">
+              #NKAT-2026
+            </span>
+          </div>
+
+          {/* Main Ticket Body */}
+          <div className="p-6 sm:p-8 space-y-6">
+            <div className="text-center space-y-1">
+              <span className="text-[10px] uppercase font-jakarta tracking-[0.25em] text-[#FDA4AF] font-bold">
+                Función Exclusiva a Distancia
+              </span>
+              <h3 className="font-cinzel text-2xl sm:text-3xl font-black gold-shimmer tracking-wider">
                 PERFECTOS MENTIROSOS
               </h3>
             </div>
 
-            {/* Details */}
-            <div className="space-y-2 font-jakarta text-sm">
-              <div className="flex items-start gap-2">
-                <span className="text-gold/60 text-xs mt-0.5 flex-shrink-0 w-16">
-                  INVITADOS
-                </span>
-                <span className="text-text-primary font-medium">
-                  NIKOL & AITANA
+            {/* Grid of Details */}
+            <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-[#07070A]/80 border border-[#D4AF37]/20 font-jakarta text-xs">
+              <div>
+                <span className="text-[10px] text-[#94A3B8] uppercase block font-semibold">Invitados Especiales</span>
+                <span className="font-cinzel text-sm font-bold text-white block mt-0.5">
+                  NIKOL &amp; AITANA
                 </span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-gold/60 text-xs mt-0.5 flex-shrink-0 w-16">
-                  FUNCIÓN
+
+              <div>
+                <span className="text-[10px] text-[#94A3B8] uppercase block font-semibold">Ubicación / Sala</span>
+                <span className="font-cinzel text-sm font-bold text-[#F0D978] block mt-0.5">
+                  Fila 1 · Llamada 24/7
                 </span>
-                <span className="text-text-primary">PERFECTOS MENTIROSOS</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-gold/60 text-xs mt-0.5 flex-shrink-0 w-16">
-                  FECHA
-                </span>
+
+              <div className="col-span-2 pt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <span className="text-[10px] text-[#94A3B8] uppercase font-semibold">Fecha y Hora de la Cita:</span>
                 <input
                   type="datetime-local"
                   value={ticketTime}
                   onChange={(e) => setTicketTime(e.target.value)}
-                  className="bg-transparent border-b border-gold/30 text-text-primary text-sm px-1 py-0.5 focus:outline-none focus:border-gold transition-colors font-jakarta"
+                  className="bg-[#141A24] border border-[#D4AF37]/40 text-[#F0D978] font-bold font-jakarta rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#D4AF37]"
                 />
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-gold/60 text-xs mt-0.5 flex-shrink-0 w-16">
-                  FILA
+            </div>
+
+            {/* Barcode & Signature */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+              <div className="flex items-center gap-1 h-9 opacity-80">
+                {[3, 1, 4, 2, 5, 2, 1, 4, 2, 6, 1, 3, 2, 4, 1, 5, 2, 3, 1, 4].map((w, idx) => (
+                  <div key={idx} className="bg-[#D4AF37] h-full rounded-sm" style={{ width: `${w}px` }} />
+                ))}
+              </div>
+
+              <div className="text-center sm:text-right">
+                <span className="font-jakarta text-[10px] text-[#94A3B8] block">Estado de Asistencia</span>
+                <span className={`font-cinzel text-xs font-bold ${ticketConfirmed ? 'text-[#22C55E]' : 'text-[#FDA4AF]'}`}>
+                  {ticketConfirmed ? 'CONFIRMADO CON AMOR' : 'ESPERANDO CONFIRMACIÓN'}
                 </span>
-                <span className="text-text-primary">1 — EN LLAMADA 24/7</span>
               </div>
             </div>
-          </div>
-
-          {/* Stub / tear-off section */}
-          <div className="absolute right-0 top-0 bottom-0 w-16 flex flex-col items-center justify-center gap-1 bg-gold/5">
-            <span
-              className="font-cinzel text-gold/40 text-xs tracking-widest"
-              style={{
-                writingMode: 'vertical-rl',
-                textOrientation: 'mixed',
-              }}
-            >
-              VIP ★ VIP
-            </span>
-          </div>
-
-          {/* Gold corner accent */}
-          <div className="absolute top-0 left-0 w-12 h-12">
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-gold to-transparent" />
-            <div className="absolute top-0 left-0 h-full w-[2px] bg-gradient-to-b from-gold to-transparent" />
-          </div>
-          <div className="absolute bottom-0 right-16 w-12 h-12">
-            <div className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-gold to-transparent" />
-            <div className="absolute bottom-0 right-0 h-full w-[2px] bg-gradient-to-t from-gold to-transparent" />
           </div>
         </motion.div>
       </div>
 
-      {/* Confirm button */}
-      <motion.button
-        whileTap={{ scale: 0.95 }}
-        whileHover={{ scale: ticketConfirmed ? 1 : 1.03 }}
-        onClick={!ticketConfirmed ? handleConfirm : undefined}
-        className={`px-8 py-3 rounded-xl font-cinzel text-sm tracking-wider transition-all duration-300 border ${
-          ticketConfirmed
-            ? 'border-gold bg-gold/15 text-gold cursor-default shadow-[0_0_20px_rgba(212,175,55,0.2)]'
-            : 'border-gold bg-gold/10 text-gold hover:bg-gold/20 hover:shadow-[0_0_24px_rgba(212,175,55,0.25)] cursor-pointer'
-        }`}
-      >
-        {ticketConfirmed ? '✅ ¡Confirmado! Nos vemos ahí 💛' : 'Confirmar Asistencia ✨'}
-      </motion.button>
+      {/* Confirmation Action Button */}
+      <div className="text-center space-y-2">
+        <motion.button
+          onClick={handleConfirm}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-cinzel text-sm font-bold tracking-wider cursor-pointer transition-all shadow-[0_0_25px_rgba(212,175,55,0.3)] ${
+            ticketConfirmed
+              ? 'bg-[#22C55E]/20 border-2 border-[#22C55E] text-[#22C55E]'
+              : 'bg-gradient-to-r from-[#D4AF37] via-[#F0D978] to-[#D4AF37] text-[#07070A] hover:shadow-[0_0_35px_rgba(212,175,55,0.6)]'
+          }`}
+        >
+          {ticketConfirmed ? (
+            <>
+              <CheckCircle2 className="w-5 h-5 text-[#22C55E]" />
+              <span>¡Cita Confirmada! Nos Vemos Ahí 💛</span>
+            </>
+          ) : (
+            <>
+              <Sparkles className="w-5 h-5 text-[#07070A]" />
+              <span>Confirmar Asistencia con Confeti ✨</span>
+            </>
+          )}
+        </motion.button>
+        <p className="font-jakarta text-xs text-[#CBD5E1]">
+          {ticketConfirmed
+            ? 'Tu confirmación quedó guardada automáticamente.'
+            : 'Presiona el botón para confirmar tu boleto para la noche de estreno.'}
+        </p>
+      </div>
     </div>
   );
 }

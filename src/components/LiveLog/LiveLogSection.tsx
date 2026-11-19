@@ -26,64 +26,58 @@ export default function LiveLogSection() {
   return (
     <section
       id="live-log"
-      className="relative min-h-screen py-20 px-4 sm:px-6 lg:px-8"
+      className="relative min-h-screen py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto"
     >
-      <div className="max-w-2xl mx-auto space-y-10">
+      <div className="space-y-12">
         {/* Section header */}
         <motion.div
-          className="text-center space-y-3"
+          className="text-center space-y-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="font-cinzel text-3xl sm:text-4xl lg:text-5xl font-bold gold-shimmer tracking-wider">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#F0D978] text-xs uppercase tracking-widest font-jakarta font-semibold">
+            <span>Bóveda en Tiempo Real</span>
+            <span className="w-1 h-1 rounded-full bg-[#FDA4AF]" />
+            <span>Anti-Spoilers para Discord</span>
+          </div>
+
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold gold-shimmer tracking-wider">
             BITÁCORA SECRETA
           </h2>
-          <p className="font-playfair text-text-secondary text-lg sm:text-xl italic">
-            Predicciones en tiempo real 🔮
+          <p className="font-playfair text-[#CBD5E1] text-lg sm:text-xl italic max-w-xl mx-auto leading-relaxed">
+            Escribe tus sospechas en vivo durante la llamada. Al sellarlas quedarán censuradas para que puedas compartir pantalla sin arruinar nada.
           </p>
         </motion.div>
 
-        {/* Main content in glass container */}
+        {/* Main Content Card */}
         <motion.div
-          className="glass rounded-2xl p-6 sm:p-8 space-y-8"
+          className="luxury-card rounded-3xl p-6 sm:p-10 space-y-10 border border-[#D4AF37]/30 shadow-2xl"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {/* Detective mode toggle */}
+          {/* Detective Mode Selector */}
           <DetectiveSwitch mode={detectiveMode} setMode={setDetectiveMode} />
 
-          {/* Prediction form */}
+          {/* Form */}
           <PredictionForm
             detective={detectiveMode}
             onSubmit={handleNewPrediction}
           />
 
-          {/* Divider */}
+          {/* Gold Decorative Divider */}
           <div className="flex items-center gap-4">
-            <div
-              className="flex-1 h-px"
-              style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent)',
-              }}
-            />
-            <span className="text-text-muted text-xs font-jakarta tracking-widest uppercase">
-              Archivo
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
+            <span className="text-[#D4AF37] text-xs font-cinzel tracking-widest uppercase font-bold">
+              Expedientes Registrados
             </span>
-            <div
-              className="flex-1 h-px"
-              style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent)',
-              }}
-            />
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
           </div>
 
-          {/* Prediction vault */}
+          {/* Prediction Vault Archive */}
           <PredictionVault
             predictions={predictions}
             setPredictions={setPredictions}

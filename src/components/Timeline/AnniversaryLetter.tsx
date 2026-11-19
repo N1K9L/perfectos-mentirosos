@@ -92,7 +92,7 @@ export const AnniversaryLetter: React.FC = () => {
                 <h4 className="font-cinzel text-xl sm:text-2xl text-[#F1F5F9] font-semibold group-hover:text-[#D4AF37] transition-colors">
                   Sobre Reservado: Solo para Aitana
                 </h4>
-                <p className="font-jakarta text-sm text-[#94A3B8]">
+                <p className="font-jakarta text-sm text-[#CBD5E1]">
                   Haz clic para romper el sello de lacre y leer tu carta de 10 meses 📜✨
                 </p>
               </div>

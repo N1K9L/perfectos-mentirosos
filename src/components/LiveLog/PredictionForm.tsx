@@ -40,117 +40,81 @@ export default function PredictionForm({ detective, onSubmit }: PredictionFormPr
 
   return (
     <div className="relative">
-      <div
-        className="glass rounded-2xl p-6 space-y-5"
-        style={{ border: '1px solid rgba(212, 175, 55, 0.15)' }}
-      >
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#0D1117] border-2 border-[#D4AF37]/30 shadow-2xl space-y-6">
         {/* Textarea */}
-        <div>
+        <div className="space-y-2">
           <label
             htmlFor="prediction-text"
-            className="block font-playfair text-sm text-text-secondary mb-2"
+            className="block font-cinzel text-xs sm:text-sm font-bold text-white tracking-wider uppercase"
           >
-            Tu teoría / predicción
+            Registrar Sospecha o Teoría en Vivo:
           </label>
           <textarea
             id="prediction-text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Creo que el personaje va a..."
+            placeholder="Ejemplo: 'Yo digo que Adrik no mató a nadie y está protegiendo a Alex...'"
             rows={3}
-            className="w-full rounded-xl px-4 py-3 text-sm font-jakarta text-text-primary placeholder-text-muted resize-none focus:outline-none focus:ring-2 focus:ring-gold/40 transition-shadow"
-            style={{
-              background: 'rgba(7, 7, 10, 0.7)',
-              border: '1px solid rgba(30, 41, 59, 0.5)',
-            }}
+            className="w-full rounded-2xl px-4 py-3.5 text-sm font-jakarta text-white placeholder-slate-400 bg-[#07070A] border border-[#D4AF37]/40 resize-none focus:outline-none focus:border-[#F0D978] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all leading-relaxed"
           />
         </div>
 
         {/* Timing selector */}
-        <div>
-          <p className="font-playfair text-sm text-text-secondary mb-3">
-            ¿En qué momento de la peli estamos?
-          </p>
-          <div className="flex flex-wrap gap-2">
+        <div className="space-y-2.5">
+          <span className="block font-jakarta text-xs font-semibold text-[#CBD5E1]">
+            ¿En qué momento de la película se te ocurrió?
+          </span>
+          <div className="grid grid-cols-3 gap-2.5">
             {TIMINGS.map((t) => (
-              <label
+              <button
                 key={t}
-                className={`relative flex items-center gap-2 cursor-pointer rounded-full px-4 py-2 text-sm font-jakarta transition-all duration-200 ${
+                type="button"
+                onClick={() => setTiming(t)}
+                className={`py-2 px-2 sm:px-3 rounded-xl font-jakarta text-xs font-bold border transition-all cursor-pointer ${
                   timing === t
-                    ? 'text-bg-deep font-semibold'
-                    : 'text-text-secondary hover:text-text-primary'
+                    ? 'bg-[#D4AF37] border-[#F0D978] text-[#07070A] shadow-[0_0_12px_rgba(212,175,55,0.4)]'
+                    : 'bg-[#141A24] border-white/10 text-[#CBD5E1] hover:border-white/30'
                 }`}
-                style={{
-                  background:
-                    timing === t
-                      ? 'linear-gradient(135deg, #A88A2A, #D4AF37)'
-                      : 'rgba(13, 17, 23, 0.6)',
-                  border:
-                    timing === t
-                      ? '1px solid #D4AF37'
-                      : '1px solid rgba(30, 41, 59, 0.5)',
-                }}
               >
-                <input
-                  type="radio"
-                  name="timing"
-                  value={t}
-                  checked={timing === t}
-                  onChange={() => setTiming(t)}
-                  className="sr-only"
-                />
                 {TIMING_LABELS[t]}
-              </label>
+              </button>
             ))}
           </div>
         </div>
 
-        {/* Submit button */}
+        {/* Submit Button */}
         <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={handleSubmit}
           disabled={!text.trim()}
-          whileHover={{ scale: text.trim() ? 1.02 : 1 }}
-          whileTap={{ scale: text.trim() ? 0.97 : 1 }}
-          className="w-full py-3 rounded-xl font-cinzel font-semibold text-sm tracking-wider transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
-          style={{
-            background: 'linear-gradient(135deg, #881337, #BE185D)',
-            color: '#F1F5F9',
-            boxShadow: text.trim()
-              ? '0 0 25px rgba(136, 19, 55, 0.4)'
-              : 'none',
-          }}
+          className={`w-full flex items-center justify-center gap-2.5 py-4 rounded-2xl font-cinzel text-sm font-bold tracking-wider cursor-pointer transition-all ${
+            text.trim()
+              ? 'bg-gradient-to-r from-[#881337] via-[#BE185D] to-[#881337] text-white border border-[#FDA4AF] shadow-[0_0_20px_rgba(136,19,55,0.4)] hover:shadow-[0_0_30px_rgba(136,19,55,0.7)]'
+              : 'bg-white/5 border border-white/10 text-slate-500 cursor-not-allowed'
+          }`}
         >
-          <Lock className="inline-block w-4 h-4 mr-2 -mt-0.5" />
-          Sellar Predicción 🔒
+          <Lock className="w-4 h-4" />
+          <span>Sellar Predicción Anti-Spoilers 🔒</span>
         </motion.button>
       </div>
 
-      {/* Wax seal stamp animation overlay */}
+      {/* Wax Seal Stamp Animation Overlay */}
       <AnimatePresence>
         {showSeal && (
           <motion.div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ scale: 2.5, opacity: 0, rotate: -25 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
           >
-            <motion.div
-              initial={{ scale: 3, opacity: 0, rotate: -20 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 20,
-              }}
-              className="text-7xl"
-              style={{
-                filter: 'drop-shadow(0 0 30px rgba(136, 19, 55, 0.8))',
-              }}
-            >
-              🔴
-            </motion.div>
+            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#881337] to-[#5B0820] border-4 border-[#F0D978] flex flex-col items-center justify-center text-center shadow-[0_0_40px_rgba(136,19,55,0.9)]">
+              <span className="font-cinzel text-xs font-black text-[#F0D978] tracking-widest">
+                SELLADO
+              </span>
+              <span className="text-2xl mt-1">🔒</span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

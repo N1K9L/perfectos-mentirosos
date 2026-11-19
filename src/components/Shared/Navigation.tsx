@@ -73,10 +73,10 @@ export const Navigation: React.FC<NavigationProps> = ({
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="font-jakarta text-xs uppercase tracking-widest text-[#94A3B8] hover:text-[#D4AF37] transition-colors relative group py-1 cursor-pointer"
+              className="font-jakarta text-xs uppercase tracking-widest text-[#E2E8F0] font-semibold hover:text-[#F0D978] transition-colors relative group py-1 cursor-pointer"
             >
               {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300" />
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F0D978] group-hover:w-full transition-all duration-300" />
             </button>
           ))}
         </div>

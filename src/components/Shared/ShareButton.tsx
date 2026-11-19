@@ -89,7 +89,7 @@ export const ShareButton: React.FC = () => {
                     <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">
                       Sincronización a Distancia 💌
                     </h3>
-                    <p className="font-jakarta text-xs text-[#94A3B8]">
+                    <p className="font-jakarta text-xs text-[#CBD5E1]">
                       Comparte tus snacks, predicciones y hora con tu pareja
                     </p>
                   </div>
@@ -97,7 +97,7 @@ export const ShareButton: React.FC = () => {
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-white/10 text-[#94A3B8] hover:text-white transition-colors"
+                  className="p-1.5 rounded-full hover:bg-white/10 text-[#CBD5E1] hover:text-white transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -105,10 +105,10 @@ export const ShareButton: React.FC = () => {
 
               {/* WhatsApp Summary Preview */}
               <div className="space-y-4">
-                <label className="block text-xs font-jakarta uppercase tracking-wider text-[#D4AF37]">
-                  Vista Previa del Mensaje:
+                <label className="block text-xs font-jakarta uppercase tracking-wider text-[#F0D978] font-bold">
+                  Vista Previa del Mensaje para WhatsApp:
                 </label>
-                <div className="p-4 rounded-xl bg-[#07070A]/80 border border-white/10 font-mono text-xs text-[#F1F5F9] whitespace-pre-wrap max-h-48 overflow-y-auto">
+                <div className="p-4 rounded-xl bg-[#07070A] border border-[#D4AF37]/30 font-mono text-xs text-white whitespace-pre-wrap max-h-48 overflow-y-auto leading-relaxed">
                   {generateWhatsAppSummary()}
                 </div>
 

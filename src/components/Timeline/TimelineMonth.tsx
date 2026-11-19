@@ -8,6 +8,8 @@ interface TimelineMonthProps {
   isSpecial?: boolean;
 }
 
+const ROMAN_NUMERALS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+
 const TimelineMonth: React.FC<TimelineMonthProps> = ({
   month,
   title,
@@ -20,82 +22,73 @@ const TimelineMonth: React.FC<TimelineMonthProps> = ({
 
   return (
     <div
-      className={`timeline-month relative flex items-center w-full mb-16 md:mb-24 ${
+      className={`timeline-month relative flex items-center w-full mb-14 md:mb-20 ${
         isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
       } flex-row`}
     >
-      {/* Connecting line segment (vertical gold line, centered) */}
-      <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2 bg-gradient-to-b from-[#D4AF37]/20 via-[#D4AF37]/40 to-[#D4AF37]/20 pointer-events-none timeline-line-segment" />
+      {/* Central Gold Spine */}
+      <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 bg-gradient-to-b from-[#D4AF37]/20 via-[#D4AF37]/50 to-[#D4AF37]/20 pointer-events-none" />
 
-      {/* Node circle */}
+      {/* Node Emblem */}
       <div
         className={`timeline-node absolute left-6 md:left-1/2 top-6 -translate-x-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 ${
           isSpecial
-            ? 'border-[#881337] shadow-[0_0_20px_rgba(136,19,55,0.6),0_0_40px_rgba(136,19,55,0.3)]'
-            : 'border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4),0_0_30px_rgba(212,175,55,0.2)]'
-        } bg-[#07070A]`}
+            ? 'border-[#FDA4AF] bg-[#881337] shadow-[0_0_25px_rgba(136,19,55,0.8),0_0_15px_rgba(212,175,55,0.4)]'
+            : 'border-[#F0D978] bg-[#0D1117] shadow-[0_0_20px_rgba(212,175,55,0.35)]'
+        }`}
       >
-        <span className="font-cinzel text-sm font-bold text-[#D4AF37]">
-          {month}
+        <span className="font-cinzel text-xs font-black text-[#F0D978]">
+          {ROMAN_NUMERALS[month - 1] ?? month}
         </span>
       </div>
 
-      {/* Spacer for the line side */}
+      {/* Spacer for desktop alignment */}
       <div className="hidden md:block md:w-1/2" />
 
-      {/* Card */}
+      {/* Card Content */}
       <div
         ref={cardRef}
         className={`timeline-card ml-16 md:ml-0 md:w-1/2 ${
-          isLeft ? 'md:pr-16' : 'md:pl-16'
+          isLeft ? 'md:pr-14' : 'md:pl-14'
         }`}
       >
         <div
-          className={`glass rounded-2xl p-6 md:p-8 relative overflow-hidden transition-all duration-300 hover:scale-[1.02] group ${
+          className={`luxury-card rounded-3xl p-6 sm:p-8 relative overflow-hidden transition-all duration-300 hover:scale-[1.01] group border-2 ${
             isSpecial
-              ? 'border-[#881337]/30 hover:border-[#881337]/60 hover:shadow-[0_0_30px_rgba(136,19,55,0.2)]'
-              : 'hover:border-[#D4AF37]/30 hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]'
+              ? 'border-[#881337] hover:border-[#FDA4AF] shadow-[0_0_30px_rgba(136,19,55,0.25)]'
+              : 'border-[#D4AF37]/30 hover:border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.1)]'
           }`}
         >
-          {/* Special glow overlay */}
+          {/* Ambient Glow */}
           {isSpecial && (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#881337]/10 via-transparent to-[#D4AF37]/5 pointer-events-none rounded-2xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#881337]/20 via-transparent to-[#D4AF37]/10 pointer-events-none rounded-3xl" />
           )}
 
-          {/* Emoji */}
-          <div className="text-4xl mb-3">{emoji}</div>
+          {/* Top Emoji & Month Tag */}
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-3xl sm:text-4xl">{emoji}</span>
+            <span className={`text-[10px] font-jakarta font-bold uppercase tracking-widest px-3 py-1 rounded-full ${
+              isSpecial
+                ? 'bg-[#881337]/50 text-[#FDA4AF] border border-[#FDA4AF]/40'
+                : 'bg-[#D4AF37]/15 text-[#F0D978] border border-[#D4AF37]/30'
+            }`}>
+              Mes {month}
+            </span>
+          </div>
 
           {/* Title */}
           <h3
-            className={`font-cinzel text-lg md:text-xl font-bold mb-3 ${
-              isSpecial ? 'text-[#FDA4AF]' : 'text-[#D4AF37]'
-            }`}
+            className={`font-cinzel text-lg sm:text-xl font-bold mb-3 tracking-wide ${
+              isSpecial ? 'text-[#FDA4AF]' : 'text-white group-hover:text-[#F0D978]'
+            } transition-colors`}
           >
             {title}
           </h3>
 
-          {/* Description */}
-          <p className="font-jakarta text-sm md:text-base text-[#94A3B8] leading-relaxed">
+          {/* Description — Crisp & Readable */}
+          <p className="font-jakarta text-sm sm:text-base text-[#F1F5F9] leading-relaxed">
             {description}
           </p>
-
-          {/* Decorative corner accent */}
-          <div
-            className={`absolute top-0 ${
-              isLeft ? 'right-0' : 'left-0'
-            } w-16 h-16 opacity-20 pointer-events-none`}
-          >
-            <div
-              className={`absolute top-0 ${
-                isLeft ? 'right-0' : 'left-0'
-              } w-px h-8 ${isSpecial ? 'bg-[#881337]' : 'bg-[#D4AF37]'}`}
-            />
-            <div
-              className={`absolute top-0 ${
-                isLeft ? 'right-0' : 'left-0'
-              } w-8 h-px ${isSpecial ? 'bg-[#881337]' : 'bg-[#D4AF37]'}`}
-            />
-          </div>
         </div>
       </div>
     </div>

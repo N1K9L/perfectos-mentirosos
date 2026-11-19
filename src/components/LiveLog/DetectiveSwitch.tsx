@@ -11,58 +11,47 @@ export default function DetectiveSwitch({ mode, setMode }: DetectiveSwitchProps)
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <p className="font-playfair text-text-secondary text-sm tracking-wider uppercase">
-        ¿Quién predice?
-      </p>
-      <div
-        className="relative flex items-center rounded-full p-1 cursor-pointer select-none"
-        style={{
-          background: 'rgba(13, 17, 23, 0.8)',
-          border: '1px solid rgba(212, 175, 55, 0.25)',
-          width: 280,
-          height: 48,
-        }}
-        onClick={() => setMode(isAitana ? 'nikol' : 'aitana')}
-        role="switch"
-        aria-checked={isAitana}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            setMode(isAitana ? 'nikol' : 'aitana');
-          }
-        }}
-      >
-        {/* Sliding gold indicator */}
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            width: 136,
-            height: 40,
-            background: 'linear-gradient(135deg, #A88A2A, #D4AF37, #F0D978)',
-            boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
-          }}
-          animate={{ x: isAitana ? 136 : 4 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        />
+      <span className="font-jakarta text-xs uppercase tracking-widest text-[#94A3B8] font-bold">
+        ¿Quién está escribiendo en este dispositivo?
+      </span>
 
-        {/* Labels */}
-        <div className="relative z-10 flex w-full">
-          <span
-            className={`flex-1 text-center text-sm font-semibold transition-colors duration-300 leading-[40px] ${
-              !isAitana ? 'text-bg-deep' : 'text-text-secondary'
-            }`}
-          >
-            Nikol 🕵️‍♂️
-          </span>
-          <span
-            className={`flex-1 text-center text-sm font-semibold transition-colors duration-300 leading-[40px] ${
-              isAitana ? 'text-bg-deep' : 'text-text-secondary'
-            }`}
-          >
-            Aitana 🕵️‍♀️
-          </span>
-        </div>
+      <div className="relative flex items-center rounded-full p-1.5 bg-[#0D1117] border-2 border-[#D4AF37]/40 max-w-sm w-full shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+        {/* Nikol Option */}
+        <button
+          onClick={() => setMode('nikol')}
+          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full font-cinzel text-xs sm:text-sm font-bold transition-all cursor-pointer z-10 ${
+            !isAitana
+              ? 'text-[#07070A]'
+              : 'text-[#94A3B8] hover:text-white'
+          }`}
+        >
+          <span>Modo Nikol 🕵️‍♂️</span>
+        </button>
+
+        {/* Aitana Option */}
+        <button
+          onClick={() => setMode('aitana')}
+          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full font-cinzel text-xs sm:text-sm font-bold transition-all cursor-pointer z-10 ${
+            isAitana
+              ? 'text-[#07070A]'
+              : 'text-[#94A3B8] hover:text-white'
+          }`}
+        >
+          <span>Modo Aitana 🕵️‍♀️</span>
+        </button>
+
+        {/* Sliding Pill Indicator */}
+        <motion.div
+          className="absolute top-1.5 bottom-1.5 rounded-full shadow-lg"
+          style={{
+            width: 'calc(50% - 6px)',
+            background: isAitana
+              ? 'linear-gradient(135deg, #FDA4AF, #F0D978)'
+              : 'linear-gradient(135deg, #F0D978, #D4AF37)',
+          }}
+          animate={{ left: isAitana ? 'calc(50% + 3px)' : '3px' }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        />
       </div>
     </div>
   );

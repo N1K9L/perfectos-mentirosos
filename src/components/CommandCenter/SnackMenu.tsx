@@ -1,21 +1,22 @@
-import { motion } from 'framer-motion';
+import { Utensils, Sparkles, Check, Heart } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 interface SnackCategory {
-  label: string;
+  title: string;
+  emoji: string;
   items: string[];
 }
 
-const categories: SnackCategory[] = [
-  { label: '🍿 Snacks', items: ['Palomitas', 'Nachos', 'Papas', 'Galletas'] },
-  { label: '🍫 Dulces', items: ['Chocolate', 'Gomitas', 'Brownies', 'Helado'] },
-  { label: '🥤 Bebidas', items: ['Coca-Cola', 'Jugo', 'Chocolate caliente', 'Café'] },
+const CATEGORIES: SnackCategory[] = [
+  { title: 'Snacks Salados', emoji: '🍿', items: ['Palomitas de Maíz', 'Nachos con Queso', 'Papas Ruffles', 'Galletitas'] },
+  { title: 'Dulces & Postres', emoji: '🍫', items: ['Chocolate con Leche', 'Gomitas Ácidas', 'Brownies Calientes', 'Helado'] },
+  { title: 'Bebidas de Estreno', emoji: '🥤', items: ['Coca-Cola Fría', 'Jugo Natural', 'Chocolate Caliente', 'Café'] },
 ];
 
 export default function SnackMenu() {
-  const [snacks, setSnacks] = useLocalStorage<string[]>('snacks', []);
-  const [emplatado, setEmplatado] = useLocalStorage<boolean>('emplatado', false);
-  const [dubTeam, setDubTeam] = useLocalStorage<string>('dubTeam', '');
+  const [snacks, setSnacks] = useLocalStorage<string[]>('snacks', ['Palomitas de Maíz', 'Chocolate con Leche']);
+  const [emplatado, setEmplatado] = useLocalStorage<boolean>('emplatado', true);
+  const [dubTeam, setDubTeam] = useLocalStorage<string>('dubTeam', 'espana');
 
   const toggleSnack = (item: string) => {
     setSnacks((prev) =>
@@ -24,152 +25,159 @@ export default function SnackMenu() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Snack categories */}
-      {categories.map((cat) => (
-        <div key={cat.label} className="space-y-2">
-          <h4 className="font-cinzel text-gold text-sm tracking-widest">
-            {cat.label}
+    <div className="space-y-8 pt-2">
+      {/* Intro */}
+      <div className="p-4 rounded-2xl bg-[#07070A]/80 border border-[#D4AF37]/30 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>
+          <h4 className="font-cinzel text-sm sm:text-base font-bold text-white">
+            Gastronomía Sincronizada a Distancia 🍽️
           </h4>
-          <div className="grid grid-cols-2 gap-2">
-            {cat.items.map((item) => {
-              const checked = snacks.includes(item);
-              return (
-                <motion.label
-                  key={item}
-                  whileTap={{ scale: 0.97 }}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all duration-200 border text-sm font-jakarta ${
-                    checked
-                      ? 'border-gold bg-gold/10 text-gold'
-                      : 'border-border-subtle bg-bg-deep/50 text-text-secondary hover:border-gold/30'
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => toggleSnack(item)}
-                    className="sr-only"
-                  />
-                  <span
-                    className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
-                      checked ? 'border-gold bg-gold' : 'border-text-muted'
+          <p className="font-jakarta text-xs text-[#CBD5E1]">
+            Selecciona lo que cada uno preparará en su casa para botanear juntos en llamada.
+          </p>
+        </div>
+        <span className="font-jakarta text-xs font-bold text-[#F0D978] bg-[#D4AF37]/15 px-3 py-1 rounded-full border border-[#D4AF37]/40 shrink-0">
+          {snacks.length} seleccionados
+        </span>
+      </div>
+
+      {/* Categories Grid */}
+      <div className="space-y-6">
+        {CATEGORIES.map((cat) => (
+          <div key={cat.title} className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">{cat.emoji}</span>
+              <h5 className="font-cinzel text-xs sm:text-sm font-bold text-[#F0D978] tracking-wider uppercase">
+                {cat.title}
+              </h5>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {cat.items.map((item) => {
+                const isChecked = snacks.includes(item);
+                return (
+                  <button
+                    key={item}
+                    onClick={() => toggleSnack(item)}
+                    className={`flex items-center justify-between p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                      isChecked
+                        ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-white shadow-[0_0_15px_rgba(212,175,55,0.2)]'
+                        : 'bg-[#0D1117]/80 border-white/10 text-[#CBD5E1] hover:border-white/30'
                     }`}
                   >
-                    {checked && (
-                      <svg
-                        className="w-3 h-3 text-bg-deep"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={3}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                  {item}
-                </motion.label>
-              );
-            })}
+                    <span className="font-jakarta text-xs font-semibold leading-tight">
+                      {item}
+                    </span>
+                    <div
+                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-1 transition-colors ${
+                        isChecked
+                          ? 'border-[#F0D978] bg-[#F0D978] text-[#07070A]'
+                          : 'border-white/30 bg-transparent'
+                      }`}
+                    >
+                      {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
-      {/* Divider */}
-      <div className="border-t border-border-subtle" />
-
-      {/* Emplatado toggle */}
-      <motion.label
-        whileTap={{ scale: 0.98 }}
-        className={`flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border ${
+      {/* Notion Ritual: Emplatar Comida */}
+      <div
+        onClick={() => setEmplatado(!emplatado)}
+        className={`p-5 rounded-2xl border transition-all cursor-pointer flex items-center gap-4 ${
           emplatado
-            ? 'border-gold bg-gold/10 shadow-[0_0_20px_rgba(212,175,55,0.15)]'
-            : 'border-border-subtle bg-bg-deep/50 hover:border-gold/30'
+            ? 'bg-gradient-to-r from-[#881337]/30 via-[#5B0820]/40 to-[#0D1117] border-[#FDA4AF] shadow-[0_0_20px_rgba(136,19,55,0.3)]'
+            : 'bg-[#0D1117] border-white/10 hover:border-[#FDA4AF]/40'
         }`}
       >
-        <input
-          type="checkbox"
-          checked={emplatado}
-          onChange={() => setEmplatado(!emplatado)}
-          className="sr-only"
-        />
+        <div className="w-12 h-12 rounded-2xl bg-[#881337]/40 border border-[#FDA4AF] flex items-center justify-center text-[#FDA4AF] shrink-0">
+          <Utensils className="w-6 h-6" />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <span className="font-cinzel text-sm sm:text-base font-bold text-white">
+              Ritual del Notion: Emplatar la comida como si fuera para el otro 🍽️
+            </span>
+            {emplatado && <Heart className="w-4 h-4 text-[#FDA4AF] fill-current" />}
+          </div>
+          <p className="font-jakarta text-xs text-[#CBD5E1] mt-0.5">
+            Servir la comida bonito, prender una vela en el escritorio y fingir que estamos cenando frente a frente.
+          </p>
+        </div>
         <div
-          className={`w-10 h-6 rounded-full relative transition-colors duration-300 flex-shrink-0 ${
-            emplatado ? 'bg-gold' : 'bg-text-muted/30'
+          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 ${
+            emplatado
+              ? 'border-[#FDA4AF] bg-[#FDA4AF] text-[#07070A]'
+              : 'border-white/30 bg-transparent'
           }`}
         >
-          <motion.div
-            className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-md"
-            animate={{ x: emplatado ? 16 : 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          />
+          {emplatado && <Check className="w-4 h-4 stroke-[3]" />}
         </div>
-        <span className="text-text-primary text-sm font-jakarta">
-          Emplatar la comida como si fuera para el otro 🍽️
-        </span>
-      </motion.label>
+      </div>
 
-      {/* Divider */}
-      <div className="border-t border-border-subtle" />
+      {/* Duelo de Doblaje */}
+      <div className="p-5 rounded-2xl bg-[#0D1117] border border-white/10 space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#F0D978]" />
+            <h5 className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+              El Gran Duelo Oficial de Doblaje
+            </h5>
+          </div>
+          <span className="text-[10px] font-jakarta uppercase tracking-wider text-[#FDA4AF] bg-[#881337]/40 px-2.5 py-0.5 rounded-full border border-[#881337]">
+            Debate Histórico
+          </span>
+        </div>
 
-      {/* Dub Duel */}
-      <div className="space-y-3">
-        <h4 className="font-cinzel text-gold text-sm tracking-widest uppercase">
-          ⚔️ Duelo de Doblajes
-        </h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label
-            className={`flex flex-col items-center gap-1 px-4 py-4 rounded-xl cursor-pointer transition-all duration-200 border text-center ${
-              dubTeam === 'espanol'
-                ? 'border-gold bg-gold/10 shadow-[0_0_16px_rgba(212,175,55,0.2)]'
-                : 'border-border-subtle bg-bg-deep/50 hover:border-gold/30'
+          <button
+            onClick={() => setDubTeam('espana')}
+            className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+              dubTeam === 'espana'
+                ? 'bg-[#D4AF37]/20 border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                : 'bg-[#07070A]/60 border-white/10 hover:border-[#D4AF37]/30'
             }`}
           >
-            <input
-              type="radio"
-              name="dubTeam"
-              value="espanol"
-              checked={dubTeam === 'espanol'}
-              onChange={() => setDubTeam('espanol')}
-              className="sr-only"
-            />
-            <span className="text-2xl">🇪🇸</span>
-            <span className="text-sm font-jakarta text-text-primary">
-              Team Español de España
-            </span>
-            <span className="text-xs text-text-muted">(Españoleta - Aitana)</span>
-          </label>
+            <div className="flex items-center justify-between">
+              <span className="font-cinzel text-sm font-bold text-white">
+                Team Español de España 🇪🇸
+              </span>
+              {dubTeam === 'espana' && <Check className="w-4 h-4 text-[#F0D978]" />}
+            </div>
+            <p className="font-jakarta text-xs text-[#F0D978] mt-1 font-semibold">
+              Españoleta (Aitana)
+            </p>
+            <p className="font-jakarta text-[11px] text-[#CBD5E1] mt-0.5">
+              Audio original peninsular. ¡Aitana ya ganó porque la película es española! 😂👑
+            </p>
+          </button>
 
-          <label
-            className={`flex flex-col items-center gap-1 px-4 py-4 rounded-xl cursor-pointer transition-all duration-200 border text-center ${
+          <button
+            onClick={() => setDubTeam('latino')}
+            className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
               dubTeam === 'latino'
-                ? 'border-crimson bg-crimson/10 shadow-[0_0_16px_rgba(136,19,55,0.3)]'
-                : 'border-border-subtle bg-bg-deep/50 hover:border-crimson/30'
+                ? 'bg-[#881337]/25 border-[#FDA4AF] shadow-[0_0_15px_rgba(136,19,55,0.25)]'
+                : 'bg-[#07070A]/60 border-white/10 hover:border-[#FDA4AF]/30'
             }`}
           >
-            <input
-              type="radio"
-              name="dubTeam"
-              value="latino"
-              checked={dubTeam === 'latino'}
-              onChange={() => setDubTeam('latino')}
-              className="sr-only"
-            />
-            <span className="text-2xl">🇨🇴</span>
-            <span className="text-sm font-jakarta text-text-primary">
-              Team Latino
-            </span>
-            <span className="text-xs text-text-muted">(Nikol)</span>
-          </label>
+            <div className="flex items-center justify-between">
+              <span className="font-cinzel text-sm font-bold text-white">
+                Team Español Latino 🇨🇴
+              </span>
+              {dubTeam === 'latino' && <Check className="w-4 h-4 text-[#FDA4AF]" />}
+            </div>
+            <p className="font-jakarta text-xs text-[#FDA4AF] mt-1 font-semibold">
+              Caleño (Nikol)
+            </p>
+            <p className="font-jakarta text-[11px] text-[#CBD5E1] mt-0.5">
+              Para los que defienden el doblaje neutro latinoamericano con honor.
+            </p>
+          </button>
         </div>
-
-        <p className="text-xs text-text-muted text-center italic font-jakarta">
-          Spoiler: Aitana ya ganó porque la peli ES española 😂🇪🇸
-        </p>
       </div>
     </div>
   );

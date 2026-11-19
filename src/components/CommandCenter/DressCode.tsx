@@ -1,100 +1,136 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Shirt, Sparkles, Lock, Unlock, BookOpen } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 interface DressOption {
   id: string;
   emoji: string;
-  text: string;
+  title: string;
+  subtitle: string;
 }
 
-const options: DressOption[] = [
-  { id: 'burrito', emoji: '🧣', text: 'Burrito en cobija rosada' },
-  { id: 'pijamada', emoji: '🖤', text: 'Pijamada elegante de Tagus' },
-  { id: 'origami', emoji: '🦢', text: 'Hacer figuritas de origami en cámara' },
-  { id: 'acostados', emoji: '😴', text: 'Quedarnos hablando acostados hasta caer domi' },
+const OPTIONS: DressOption[] = [
+  {
+    id: 'burrito',
+    emoji: '🧣',
+    title: 'Burrito en Cobija Rosada',
+    subtitle: 'Nivel máximo de comodidad y ternura en llamada.',
+  },
+  {
+    id: 'pijamada',
+    emoji: '🖤',
+    title: 'Pijamada Elegante de Tagus',
+    subtitle: 'Ropa oscura, vibra misteriosa y actitud de la élite.',
+  },
+  {
+    id: 'origami',
+    emoji: '🦢',
+    title: 'Origami en Cámara',
+    subtitle: 'Hacer figuritas de papel antes de que empiece la peli (guiño a octubre).',
+  },
+  {
+    id: 'acostados',
+    emoji: '😴',
+    title: 'Acostados hasta Quedar Domi',
+    subtitle: 'Celular en la almohada y hablar suavecito hasta dormirnos juntos.',
+  },
 ];
 
 export default function DressCode() {
-  const [dressCode, setDressCode] = useLocalStorage<string>('dressCode', '');
+  const [dressCode, setDressCode] = useLocalStorage<string>('dressCode', 'burrito');
   const [prendaRevealed, setPrendaRevealed] = useState(false);
 
   return (
-    <div className="space-y-6">
-      {/* Dress code options */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {options.map((opt) => {
-          const selected = dressCode === opt.id;
+    <div className="space-y-8 pt-2">
+      {/* Intro */}
+      <div className="flex items-center gap-2 text-white">
+        <Shirt className="w-4 h-4 text-[#FDA4AF]" />
+        <h5 className="font-cinzel text-xs sm:text-sm font-bold tracking-wider uppercase text-[#F0D978]">
+          Elige el Vibe Oficial de la Videollamada
+        </h5>
+      </div>
+
+      {/* Selectable Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        {OPTIONS.map((opt) => {
+          const isSelected = dressCode === opt.id;
           return (
-            <motion.button
+            <button
               key={opt.id}
-              whileTap={{ scale: 0.97 }}
-              whileHover={{ scale: 1.02 }}
               onClick={() => setDressCode(opt.id)}
-              className={`relative flex flex-col items-center gap-2 p-5 rounded-xl cursor-pointer transition-all duration-300 border text-center ${
-                selected
-                  ? 'border-gold bg-gold/10 shadow-[0_0_24px_rgba(212,175,55,0.25)]'
-                  : 'border-border-subtle bg-bg-deep/50 hover:border-gold/30'
+              className={`p-4 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden group ${
+                isSelected
+                  ? 'bg-[#D4AF37]/20 border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.25)]'
+                  : 'bg-[#0D1117] border-white/10 hover:border-[#D4AF37]/40'
               }`}
             >
-              {/* Gold glow ring for selected */}
-              {selected && (
-                <motion.div
-                  layoutId="dressCodeGlow"
-                  className="absolute inset-0 rounded-xl border-2 border-gold"
-                  style={{
-                    boxShadow: '0 0 20px rgba(212,175,55,0.3), inset 0 0 20px rgba(212,175,55,0.05)',
-                  }}
-                  transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                />
-              )}
-              <span className="text-3xl">{opt.emoji}</span>
-              <span
-                className={`text-sm font-jakarta relative z-10 ${
-                  selected ? 'text-gold font-medium' : 'text-text-secondary'
-                }`}
-              >
-                {opt.text}
-              </span>
-            </motion.button>
+              <div className="flex items-start gap-3.5">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 border transition-all ${
+                    isSelected
+                      ? 'bg-[#881337]/40 border-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.3)]'
+                      : 'bg-[#07070A] border-white/10'
+                  }`}
+                >
+                  {opt.emoji}
+                </div>
+                <div>
+                  <h6 className="font-cinzel text-xs sm:text-sm font-bold text-white group-hover:text-[#F0D978] transition-colors">
+                    {opt.title}
+                  </h6>
+                  <p className="font-jakarta text-[11px] text-[#CBD5E1] mt-0.5 leading-snug">
+                    {opt.subtitle}
+                  </p>
+                </div>
+              </div>
+            </button>
           );
         })}
       </div>
 
-      {/* Divider */}
-      <div className="border-t border-border-subtle" />
-
-      {/* Secret Prenda */}
-      <div className="space-y-3">
-        <motion.button
-          whileTap={{ scale: 0.97 }}
+      {/* Secret Challenge (Prenda Secreta del Notion) */}
+      <div className="pt-2">
+        <button
           onClick={() => setPrendaRevealed(!prendaRevealed)}
-          className={`w-full px-4 py-3 rounded-xl font-cinzel text-sm tracking-wider transition-all duration-300 border ${
-            prendaRevealed
-              ? 'border-gold bg-gold/10 text-gold'
-              : 'border-crimson bg-crimson/10 text-rose-soft hover:bg-crimson/20'
-          }`}
+          className="w-full flex items-center justify-between p-4 rounded-2xl bg-[#881337]/20 border-2 border-[#881337]/50 hover:border-[#FDA4AF] transition-all cursor-pointer group"
         >
-          🔒 Carta de Prenda Secreta
-        </motion.button>
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-[#881337] flex items-center justify-center text-[#FDA4AF] group-hover:scale-110 transition-transform">
+              {prendaRevealed ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+            </div>
+            <div className="text-left">
+              <span className="font-cinzel text-xs sm:text-sm font-bold text-white block">
+                🔒 Carta de Prenda Desbloqueable
+              </span>
+              <span className="font-jakarta text-[11px] text-[#FDA4AF]">
+                {prendaRevealed ? 'Prenda del Notion revelada' : 'Toca para romper el sello y revelar el reto pendiente'}
+              </span>
+            </div>
+          </div>
+          <Sparkles className="w-4 h-4 text-[#F0D978]" />
+        </button>
 
         <AnimatePresence>
           {prendaRevealed && (
             <motion.div
-              initial={{ opacity: 0, filter: 'blur(12px)', height: 0 }}
-              animate={{ opacity: 1, filter: 'blur(0px)', height: 'auto' }}
-              exit={{ opacity: 0, filter: 'blur(12px)', height: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.5 }}
+              className="overflow-hidden mt-3"
             >
-              <div className="glass rounded-xl p-4 text-center space-y-2">
-                <p className="text-text-primary text-sm font-jakarta leading-relaxed">
-                  Prenda pendiente del Notion:
+              <div className="p-6 rounded-2xl bg-[#0D1117] border border-[#FDA4AF]/60 shadow-[0_10px_30px_rgba(136,19,55,0.3)] text-center space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#881337]/40 text-[#FDA4AF] text-xs font-bold uppercase tracking-wider">
+                  <BookOpen className="w-3.5 h-3.5 text-[#F0D978]" />
+                  <span>Reto Oficial del Notion</span>
+                </div>
+                <p className="font-playfair text-lg sm:text-xl text-[#F0D978] italic font-semibold max-w-md mx-auto leading-relaxed">
+                  “Leerme 9 páginas de un libro con tu hermosa voz (Aitana) 🎙️📖”
                 </p>
-                <p className="font-playfair text-gold text-base italic">
-                  &quot;Leerme 9 páginas de un libro con tu voz (Aitana)&quot;
+                <p className="font-jakarta text-xs text-[#CBD5E1]">
+                  (Quedó sellado en nuestro Notion y no te salvas de cumplirlo esta noche de estreno ❤️)
                 </p>
-                <p className="text-2xl">🎙️📖</p>
               </div>
             </motion.div>
           )}

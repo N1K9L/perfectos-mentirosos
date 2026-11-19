@@ -13,12 +13,11 @@ interface SealedPredictionProps {
 
 export default function SealedPrediction({
   prediction,
-  onReveal: _onReveal,
   onScore,
   revealDelay = 0,
 }: SealedPredictionProps) {
   const rotation = useMemo(
-    () => (Math.random() * 4 - 2).toFixed(2),
+    () => (Math.random() * 2 - 1).toFixed(2),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [prediction.id]
   );
@@ -36,107 +35,85 @@ export default function SealedPrediction({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: revealDelay, duration: 0.5 }}
-      className="relative rounded-xl p-5 overflow-hidden"
+      className="relative rounded-2xl p-5 overflow-hidden border border-[#D4AF37]/40 shadow-xl bg-gradient-to-br from-[#10141D] to-[#0A0D12]"
       style={{
-        background:
-          'linear-gradient(135deg, rgba(13, 17, 23, 0.9), rgba(7, 7, 10, 0.95))',
-        border: '1px solid rgba(212, 175, 55, 0.25)',
         transform: `rotate(${rotation}deg)`,
-        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.4)',
       }}
     >
-      {/* Paper texture overlay */}
-      <div
-        className="absolute inset-0 opacity-5 pointer-events-none"
-        style={{
-          backgroundImage:
-            'url("data:image/svg+xml,%3Csvg width=\'4\' height=\'4\' viewBox=\'0 0 4 4\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 3h1v1H1V3zm2-2h1v1H3V1z\' fill=\'%23D4AF37\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")',
-        }}
-      />
-
       {/* Header */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2.5">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-jakarta text-gold font-semibold tracking-wider uppercase">
+          <span className="text-xs font-cinzel text-[#F0D978] font-bold tracking-wider uppercase">
             {DETECTIVE_LABELS[prediction.detective]}
           </span>
-          <span className="text-xs text-text-muted">•</span>
-          <span className="text-xs text-text-muted font-jakarta">
+          <span className="text-xs text-white/30">•</span>
+          <span className="text-xs text-[#FDA4AF] font-jakarta font-semibold">
             {TIMING_LABELS[prediction.timing]}
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-text-muted font-jakarta">
+          <span className="text-xs text-[#CBD5E1] font-mono font-medium">
             {formattedTime}
           </span>
           {prediction.sealed ? (
-            <Lock className="w-3.5 h-3.5 text-crimson" />
+            <Lock className="w-3.5 h-3.5 text-[#FDA4AF]" />
           ) : (
-            <Unlock className="w-3.5 h-3.5 text-gold" />
+            <Unlock className="w-3.5 h-3.5 text-[#F0D978]" />
           )}
         </div>
       </div>
 
       {/* Prediction text */}
-      <p
-        className={`font-jakarta text-sm leading-relaxed text-text-primary mb-3 transition-all duration-800 ${
-          prediction.sealed ? 'sealed-text' : 'sealed-text revealed'
-        }`}
-      >
-        {prediction.text}
-      </p>
+      <div className="relative my-2">
+        <p
+          className={`font-jakarta text-sm sm:text-base leading-relaxed text-white font-medium transition-all duration-700 ${
+            prediction.sealed ? 'sealed-text select-none' : 'sealed-text revealed'
+          }`}
+        >
+          {prediction.text}
+        </p>
 
-      {/* Footer */}
-      {prediction.sealed ? (
-        <div className="flex items-center justify-center pt-2">
-          <span className="wax-seal inline-block text-2xl rounded-full p-1">
-            🔴
-          </span>
-        </div>
-      ) : (
-        <div className="pt-2">
+        {prediction.sealed && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 pointer-events-none">
+            <div className="w-9 h-9 rounded-full bg-[#881337] border border-[#F0D978] flex items-center justify-center shadow-[0_0_15px_rgba(136,19,55,0.8)]">
+              <span className="text-xs">🔒</span>
+            </div>
+            <span className="font-cinzel text-[10px] text-[#F0D978] font-black uppercase tracking-widest bg-[#07070A]/80 px-2 py-0.5 rounded border border-[#D4AF37]/30">
+              EXPEDIENTE CENSURADO
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Footer / Scoring */}
+      {!prediction.sealed && (
+        <div className="pt-3 border-t border-white/10 mt-3">
           {prediction.correct === null ? (
-            <div className="flex gap-3">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <div className="flex gap-2.5">
+              <button
                 onClick={() => onScore(prediction.id, true)}
-                className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-semibold font-jakarta transition-colors"
-                style={{
-                  background: 'rgba(34, 197, 94, 0.15)',
-                  border: '1px solid rgba(34, 197, 94, 0.3)',
-                  color: '#22C55E',
-                }}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold font-jakarta bg-[#22C55E]/20 border border-[#22C55E]/60 text-[#22C55E] hover:bg-[#22C55E]/30 transition-all cursor-pointer"
               >
-                <CheckCircle className="w-4 h-4" />
-                Le atiné ✅
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                <CheckCircle className="w-3.5 h-3.5" />
+                <span>Le atiné ✅</span>
+              </button>
+              <button
                 onClick={() => onScore(prediction.id, false)}
-                className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-semibold font-jakarta transition-colors"
-                style={{
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.3)',
-                  color: '#EF4444',
-                }}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold font-jakarta bg-[#EF4444]/20 border border-[#EF4444]/60 text-[#EF4444] hover:bg-[#EF4444]/30 transition-all cursor-pointer"
               >
-                <XCircle className="w-4 h-4" />
-                Fallé ❌
-              </motion.button>
+                <XCircle className="w-3.5 h-3.5" />
+                <span>Fallé ❌</span>
+              </button>
             </div>
           ) : (
             <div
-              className="text-center py-2 rounded-lg text-sm font-semibold font-jakarta"
-              style={{
-                background: prediction.correct
-                  ? 'rgba(34, 197, 94, 0.1)'
-                  : 'rgba(239, 68, 68, 0.1)',
-                color: prediction.correct ? '#22C55E' : '#EF4444',
-              }}
+              className={`text-center py-2 rounded-xl text-xs font-bold font-jakarta border ${
+                prediction.correct
+                  ? 'bg-[#22C55E]/15 border-[#22C55E]/50 text-[#22C55E]'
+                  : 'bg-[#EF4444]/15 border-[#EF4444]/50 text-[#EF4444]'
+              }`}
             >
-              {prediction.correct ? '✅ ¡Le atinó!' : '❌ Falló'}
+              {prediction.correct ? '🏆 ¡Predicción Correcta!' : '💥 Teoría Descartada'}
             </div>
           )}
         </div>
