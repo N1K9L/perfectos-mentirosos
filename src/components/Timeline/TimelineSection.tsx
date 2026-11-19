@@ -140,7 +140,7 @@ export const TimelineSection: React.FC = () => {
               key={data.month}
               month={data.month}
               title={data.title}
-              emoji={data.emoji}
+              category={data.category}
               description={data.description}
               isSpecial={data.isSpecial}
             />

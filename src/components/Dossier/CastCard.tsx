@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Shield, Sparkles, ArrowRight, Eye } from 'lucide-react';
+import { Shield, ArrowRight, Eye, Sparkles } from 'lucide-react';
 
 interface CastCardProps {
   character: string;
   actor: string;
   knownFor: string;
   description: string;
-  icon: string;
+  photoUrl: string;
   roleBadge: string;
   quote: string;
   trait: string;
@@ -17,7 +17,7 @@ export default function CastCard({
   actor,
   knownFor,
   description,
-  icon,
+  photoUrl,
   roleBadge,
   quote,
   trait,
@@ -26,113 +26,110 @@ export default function CastCard({
 
   return (
     <div
-      className="cursor-pointer select-none w-full max-w-[320px] h-[440px]"
+      className="cursor-pointer select-none w-full max-w-[340px] h-[480px] group"
       style={{ perspective: '1200px' }}
       onClick={() => setFlipped((prev) => !prev)}
       role="button"
       tabIndex={0}
-      aria-label={`Expediente de ${character}`}
+      aria-label={`Expediente de ${character} (${actor})`}
     >
       <div
-        className="relative h-full w-full transition-transform duration-700"
+        className="relative h-full w-full transition-transform duration-700 rounded-3xl"
         style={{
           transformStyle: 'preserve-3d',
           transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
         }}
       >
-        {/* FRONT SIDE */}
+        {/* FRONT SIDE (REAL ACTOR PHOTOGRAPH) */}
         <div
-          className="absolute inset-0 rounded-3xl p-6 flex flex-col justify-between overflow-hidden luxury-card border-2 border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all duration-300"
+          className="absolute inset-0 rounded-3xl overflow-hidden border border-[#D4AF37]/40 group-hover:border-[#F0D978] shadow-[0_15px_40px_rgba(0,0,0,0.8)] transition-all duration-500 bg-[#07070A]"
           style={{ backfaceVisibility: 'hidden' }}
         >
-          {/* Subtle background ambient glow */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#881337]/30 to-transparent blur-2xl pointer-events-none" />
+          {/* Background Real Actor Image */}
+          <img
+            src={photoUrl}
+            alt={actor}
+            className="absolute inset-0 w-full h-full object-cover object-top filter brightness-[0.85] contrast-[1.05] group-hover:scale-105 transition-transform duration-700"
+          />
 
-          {/* Top Badge & Insignia */}
-          <div className="flex items-center justify-between z-10">
-            <span className="font-jakarta text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full bg-[#881337]/40 text-[#FDA4AF] border border-[#881337]/60">
+          {/* Deep Cinematic Vignette Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#07070A] via-[#07070A]/50 to-black/30 pointer-events-none" />
+
+          {/* Top Pill & Crest */}
+          <div className="absolute top-5 inset-x-5 flex items-center justify-between z-10">
+            <span className="font-jakarta text-[10px] font-bold tracking-[0.2em] uppercase px-3.5 py-1.5 rounded-full bg-[#07070A]/85 text-[#F0D978] border border-[#D4AF37]/60 backdrop-blur-md shadow-lg">
               {roleBadge}
             </span>
-            <div className="w-8 h-8 rounded-full border border-[#D4AF37]/50 bg-[#07070A]/80 flex items-center justify-center text-[#F0D978]">
+            <div className="w-8 h-8 rounded-full border border-[#D4AF37]/70 bg-[#07070A]/80 backdrop-blur-md flex items-center justify-center text-[#F0D978] shadow-md">
               <Shield className="w-4 h-4" />
             </div>
           </div>
 
-          {/* Central Emblem & Avatar representation */}
-          <div className="flex flex-col items-center text-center my-auto z-10 space-y-3">
-            <div className="relative">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#1E293B] via-[#0D1117] to-[#07070A] border-2 border-[#D4AF37] flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.3)]">
-                <span className="text-4xl drop-shadow-md">{icon}</span>
-              </div>
-              <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#881337] border border-[#F0D978] flex items-center justify-center text-[10px] text-white">
-                <Sparkles className="w-3.5 h-3.5 text-[#F0D978]" />
-              </div>
-            </div>
-
+          {/* Bottom Character Info */}
+          <div className="absolute bottom-0 inset-x-0 p-6 z-10 space-y-3 bg-gradient-to-t from-[#07070A] via-[#07070A]/95 to-transparent pt-12">
             <div className="space-y-1">
-              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white tracking-wide">
+              <span className="font-jakarta text-[11px] text-[#FDA4AF] uppercase tracking-widest font-semibold block">
+                {actor}
+              </span>
+              <h3 className="font-cinzel text-2xl font-black text-white tracking-wide drop-shadow-md">
                 {character}
               </h3>
-              <p className="font-jakarta text-xs sm:text-sm font-semibold text-[#F0D978]">
-                {actor}
-              </p>
             </div>
 
-            <p className="font-playfair text-xs italic text-[#CBD5E1] px-2 leading-relaxed">
+            <p className="font-playfair text-xs italic text-[#CBD5E1] line-clamp-2 leading-relaxed">
               "{quote}"
             </p>
-          </div>
 
-          {/* Bottom Flip Action Hint */}
-          <div className="pt-3 border-t border-white/10 flex items-center justify-between z-10">
-            <span className="font-jakarta text-[11px] font-semibold text-[#94A3B8]">
-              Rasgo: <strong className="text-white">{trait}</strong>
-            </span>
-            <span className="inline-flex items-center gap-1 font-jakarta text-xs font-bold text-[#F0D978] group-hover:translate-x-1 transition-transform">
-              <span>Ver ficha</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </span>
+            <div className="pt-2 border-t border-white/15 flex items-center justify-between text-xs">
+              <span className="font-jakarta text-[11px] text-[#94A3B8]">
+                Rasgo: <strong className="text-white font-semibold">{trait}</strong>
+              </span>
+              <span className="inline-flex items-center gap-1 font-jakarta text-xs font-bold text-[#F0D978] group-hover:translate-x-1 transition-transform">
+                <span>Ver ficha</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* BACK SIDE (FLIPPED DOSSIER) */}
+        {/* BACK SIDE (CLASSICAL DOSSIER) */}
         <div
-          className="absolute inset-0 rounded-3xl p-6 flex flex-col justify-between overflow-hidden bg-[#0A0E14] border-2 border-[#F0D978] shadow-[0_0_35px_rgba(212,175,55,0.3)]"
+          className="absolute inset-0 rounded-3xl p-7 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#141A24] via-[#0D1117] to-[#07070A] border-2 border-[#F0D978] shadow-[0_0_40px_rgba(212,175,55,0.35)]"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-[#D4AF37]/30 pb-3">
+          <div className="flex items-center justify-between border-b border-[#D4AF37]/30 pb-4">
             <div>
-              <span className="font-jakarta text-[10px] text-[#FDA4AF] uppercase tracking-wider block font-bold">
-                Expediente Tagus Confidencial
+              <span className="font-jakarta text-[10px] text-[#FDA4AF] uppercase tracking-widest font-bold block">
+                Universidad Tagus · Archivo Confidencial
               </span>
-              <h4 className="font-cinzel text-base font-bold text-[#F0D978]">
-                {actor}
+              <h4 className="font-cinzel text-lg font-black text-[#F0D978] mt-0.5">
+                {actor} como {character}
               </h4>
             </div>
-            <Eye className="w-4 h-4 text-[#D4AF37]" />
+            <Eye className="w-5 h-5 text-[#D4AF37]" />
           </div>
 
           {/* Description */}
           <div className="space-y-4 my-auto">
             <div>
-              <span className="font-jakarta text-[10px] text-[#94A3B8] uppercase tracking-wider font-semibold">
-                Perfil Psicológico:
+              <span className="font-jakarta text-[10px] text-[#94A3B8] uppercase tracking-wider font-bold block">
+                Perfil del Personaje:
               </span>
-              <p className="font-jakarta text-xs sm:text-sm text-[#F1F5F9] leading-relaxed mt-1">
+              <p className="font-jakarta text-xs sm:text-sm text-[#F1F5F9] leading-relaxed mt-1.5">
                 {description}
               </p>
             </div>
 
             {knownFor && (
-              <div className="p-3 rounded-xl bg-[#141A24] border border-[#D4AF37]/20">
-                <span className="font-jakarta text-[10px] text-[#F0D978] uppercase tracking-wider block font-bold">
-                  Trabajos destacados:
+              <div className="p-3.5 rounded-2xl bg-[#07070A]/80 border border-[#D4AF37]/30">
+                <span className="font-jakarta text-[10px] text-[#F0D978] uppercase tracking-wider font-bold block">
+                  Trayectoria destacada:
                 </span>
-                <p className="font-jakarta text-xs font-semibold text-white mt-0.5">
+                <p className="font-jakarta text-xs font-bold text-white mt-1">
                   {knownFor}
                 </p>
               </div>
@@ -141,8 +138,9 @@ export default function CastCard({
 
           {/* Return Hint */}
           <div className="pt-3 border-t border-white/10 text-center">
-            <span className="font-jakarta text-xs font-semibold text-[#FDA4AF]">
-              🔄 Toca para volver a la portada
+            <span className="inline-flex items-center gap-1.5 font-jakarta text-xs font-bold text-[#FDA4AF]">
+              <Sparkles className="w-3.5 h-3.5 text-[#F0D978]" />
+              <span>Toca para voltear a la fotografía</span>
             </span>
           </div>
         </div>

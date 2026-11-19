@@ -10,7 +10,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
   variant = 'gold',
 }) => {
   return (
-    <div className={`relative w-full max-w-4xl mx-auto py-8 px-4 flex items-center justify-center ${className}`}>
+    <div className={`relative w-full max-w-4xl mx-auto py-16 sm:py-24 px-4 flex items-center justify-center ${className}`}>
       {/* Left fading line */}
       <div
         className="flex-1 h-px"
