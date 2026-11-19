@@ -106,36 +106,36 @@ export const AnniversaryLetter: React.FC = () => {
         ) : (
           /* Opened Parchment Letter View */
           <motion.div
-            className="glass-dark rounded-3xl p-6 sm:p-12 border border-[#D4AF37]/40 shadow-[0_15px_60px_rgba(0,0,0,0.8)] relative overflow-hidden"
+            className="glass-dark rounded-[32px] p-8 sm:p-14 md:p-16 border border-[#D4AF37]/40 shadow-[0_20px_70px_rgba(0,0,0,0.85)] relative overflow-hidden"
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Top vintage seal ribbon */}
-            <div className="flex justify-between items-center border-b border-[#D4AF37]/20 pb-5 mb-8">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#881337]/40 border border-[#D4AF37] flex items-center justify-center">
-                  <span className="font-cinzel text-xs font-bold text-[#D4AF37]">10M</span>
+            <div className="flex justify-between items-center border-b border-[#D4AF37]/25 pb-6 mb-10">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#881337]/40 border-2 border-[#D4AF37] flex items-center justify-center shrink-0 shadow-md">
+                  <span className="font-cinzel text-sm font-bold text-[#F0D978]">10M</span>
                 </div>
                 <div>
-                  <h5 className="font-cinzel text-sm sm:text-base font-bold text-[#D4AF37]">
+                  <h5 className="font-cinzel text-base sm:text-lg font-bold text-[#D4AF37] tracking-wider">
                     EXPEDIENTE: NUESTRA PROMESA
                   </h5>
-                  <p className="font-jakarta text-xs text-[#94A3B8]">19 de Enero — 19 de Noviembre</p>
+                  <p className="font-jakarta text-xs sm:text-sm text-[#94A3B8]">19 de Enero — 19 de Noviembre</p>
                 </div>
               </div>
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-xs font-jakarta text-[#94A3B8] hover:text-[#D4AF37] underline transition-colors"
+                className="text-xs sm:text-sm font-jakarta text-[#94A3B8] hover:text-[#D4AF37] underline transition-colors cursor-pointer"
               >
                 Volver a sellar 🔒
               </button>
             </div>
 
             {/* Letter Body */}
-            <div className="space-y-6 font-playfair text-[#F1F5F9] leading-relaxed text-base sm:text-lg">
-              <p className="text-xl sm:text-2xl font-bold font-cinzel text-[#D4AF37]">
+            <div className="space-y-8 font-playfair text-[#F1F5F9] leading-loose text-base sm:text-xl">
+              <p className="text-2xl sm:text-3xl font-bold font-cinzel text-[#D4AF37]">
                 Mi reina, mi compañera de vida, mi Aitana:
               </p>
 
@@ -147,7 +147,7 @@ export const AnniversaryLetter: React.FC = () => {
                 Pasamos por tantas etapas: desde cobrarte millones de euros de broma, hasta las 100 razones que me escribiste, el primer “te quiero”, aquel inolvidable “te amo” que lo cambió todo, y el pacto de estar en llamada 24/7 para no soltarnos jamás.
               </p>
 
-              <p className="italic text-[#FDA4AF] bg-[#881337]/15 p-4 rounded-xl border-l-2 border-[#881337]">
+              <p className="italic text-[#FDA4AF] bg-[#881337]/20 p-6 sm:p-8 rounded-2xl border-l-4 border-[#881337] leading-relaxed my-6">
                 “Sé que no ha sido un camino plano. Tuvimos cielos grises, momentos donde las dudas y la distancia nos desafiaron, y crisis que nos exigieron madurar y respetarnos de verdad. Pero este noviembre demostró quiénes somos: dos almas que eligen estar juntas con libertad, con respeto y con un amor inquebrantable.”
               </p>
 
@@ -156,29 +156,29 @@ export const AnniversaryLetter: React.FC = () => {
               </p>
 
               {/* Typography Play: Te amo wall */}
-              <div className="py-4 text-center space-y-2 select-none">
-                <span className="block font-cinzel text-2xl sm:text-4xl font-extrabold gold-shimmer">
+              <div className="py-8 text-center space-y-3 select-none">
+                <span className="block font-cinzel text-3xl sm:text-5xl font-extrabold gold-shimmer tracking-wider">
                   TE AMO INFINITAMENTE
                 </span>
-                <p className="font-jakarta text-xs uppercase tracking-widest text-[#FDA4AF]">
+                <p className="font-jakarta text-xs sm:text-sm uppercase tracking-[0.25em] text-[#FDA4AF] font-semibold">
                   Te amo con el alma · Te amo cada día más · Te amo sin condiciones
                 </p>
               </div>
 
-              <p className="text-right font-cinzel text-[#D4AF37] text-lg sm:text-xl font-semibold pt-4">
+              <p className="text-right font-cinzel text-[#D4AF37] text-xl sm:text-2xl font-semibold pt-6">
                 Por siempre tu novio,
                 <br />
-                <span className="text-2xl sm:text-3xl text-white">Nikol 💛</span>
+                <span className="text-2xl sm:text-4xl text-white mt-1 block">Nikol 💛</span>
               </p>
             </div>
 
             {/* Interactive Kiss Counter Module */}
-            <div className="mt-10 pt-8 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="text-center sm:text-left">
-                <h5 className="font-cinzel text-base font-bold text-[#F0D978]">
+            <div className="mt-12 pt-10 border-t border-[#D4AF37]/25 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="text-center sm:text-left space-y-1">
+                <h5 className="font-cinzel text-base sm:text-lg font-bold text-[#F0D978]">
                   Contador Oficial de Besos Virtuales 💋
                 </h5>
-                <p className="font-jakarta text-xs text-[#94A3B8]">
+                <p className="font-jakarta text-xs sm:text-sm text-[#94A3B8]">
                   Presiona el corazón para enviarle besitos a Nikol en tiempo real.
                 </p>
               </div>
@@ -186,10 +186,10 @@ export const AnniversaryLetter: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={handleKiss}
-                  className="flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-[#881337] to-[#BE185D] hover:from-[#BE185D] hover:to-[#881337] text-white font-jakarta font-medium shadow-[0_0_20px_rgba(136,19,55,0.5)] active:scale-95 transition-all group cursor-pointer"
+                  className="flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#881337] to-[#BE185D] hover:from-[#BE185D] hover:to-[#881337] text-white font-jakarta font-medium shadow-[0_0_25px_rgba(136,19,55,0.5)] active:scale-95 transition-all group cursor-pointer"
                 >
-                  <Heart className="w-5 h-5 fill-current text-[#FDA4AF] group-hover:scale-125 transition-transform" />
-                  <span className="text-sm font-bold">Enviar Besito ({kissCount})</span>
+                  <Heart className="w-6 h-6 fill-current text-[#FDA4AF] group-hover:scale-125 transition-transform" />
+                  <span className="text-sm sm:text-base font-bold">Enviar Besito ({kissCount})</span>
                 </button>
 
                 {/* Floating kiss indicators */}

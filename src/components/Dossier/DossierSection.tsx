@@ -7,27 +7,27 @@ export default function DossierSection() {
   return (
     <section
       id="dossier"
-      className="relative py-24 sm:py-32 px-4 max-w-6xl mx-auto"
+      className="relative py-28 sm:py-40 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
     >
-      <div className="space-y-16">
+      <div className="space-y-20 sm:space-y-24">
         {/* Section header */}
         <motion.div
-          className="text-center space-y-4"
+          className="text-center space-y-6 max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#881337]/30 border border-[#D4AF37]/40 text-[#FDA4AF] text-xs uppercase tracking-widest font-jakarta font-semibold">
-            <Film className="w-3.5 h-3.5 text-[#F0D978]" />
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-[#881337]/30 border border-[#D4AF37]/40 text-[#FDA4AF] text-xs sm:text-sm uppercase tracking-widest font-jakarta font-semibold shadow-lg">
+            <Film className="w-4 h-4 text-[#F0D978]" />
             <span>Novela de Alex Mírez · Adaptación Oficial Prime Video</span>
           </div>
 
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-black tracking-wide gold-shimmer">
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-black tracking-wider gold-shimmer">
             EL DOSSIER DE LA PELÍCULA
           </h2>
 
-          <p className="font-playfair text-lg sm:text-xl text-[#CBD5E1] italic max-w-xl mx-auto leading-relaxed">
+          <p className="font-playfair text-lg sm:text-2xl text-[#CBD5E1] italic max-w-2xl mx-auto leading-relaxed">
             Todo lo que necesitas saber antes del estreno, 100% libre de spoilers.
           </p>
         </motion.div>
@@ -44,13 +44,13 @@ export default function DossierSection() {
         </motion.div>
 
         {/* Cast Section */}
-        <div className="space-y-8 pt-6">
-          <div className="text-center space-y-2">
-            <h3 className="font-cinzel text-2xl sm:text-3xl font-bold tracking-wide text-white">
+        <div className="space-y-12 pt-8">
+          <div className="text-center space-y-3">
+            <h3 className="font-cinzel text-2xl sm:text-4xl font-bold tracking-wide text-white">
               Fichas del Reparto &amp; Personajes
             </h3>
-            <p className="font-jakarta text-xs sm:text-sm text-[#F0D978] font-semibold">
-              Toca o haz clic en cualquier tarjeta para voltear el expediente 3D 🔄
+            <p className="font-jakarta text-sm sm:text-base text-[#F0D978] font-semibold tracking-wide">
+              Toca o haz clic en cualquier tarjeta para voltear el expediente confidencial 🔄
             </p>
           </div>
 

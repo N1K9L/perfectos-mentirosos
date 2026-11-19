@@ -32,30 +32,30 @@ export default function HypeThermometer() {
   const fillPercent = Math.min(100, Math.max(1, (hypeLevel / 1000) * 100));
 
   return (
-    <div className="space-y-10 pt-4">
+    <div className="space-y-12 py-2">
       {/* Gauge Box */}
-      <div className="p-8 rounded-3xl bg-[#07070A]/80 border border-[#D4AF37]/35 space-y-6 shadow-xl">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#881337]/40 border border-[#FDA4AF] flex items-center justify-center text-[#FDA4AF]">
-              <Flame className="w-4 h-4" />
+      <div className="p-8 sm:p-12 rounded-[26px] bg-[#07070A]/85 border border-[#D4AF37]/35 space-y-8 shadow-2xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-2xl bg-[#881337]/40 border border-[#FDA4AF] flex items-center justify-center text-[#FDA4AF] shrink-0">
+              <Flame className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-cinzel text-xs sm:text-sm font-bold text-white tracking-widest uppercase block">
+              <span className="font-cinzel text-sm sm:text-base font-bold text-white tracking-widest uppercase block">
                 Termómetro de Expectativa
               </span>
-              <span className="font-jakarta text-[11px] text-[#94A3B8]">
-                Desliza para calibrar tu nivel de hype
+              <span className="font-jakarta text-xs text-[#CBD5E1]">
+                Desliza para calibrar tu nivel de emoción para el estreno
               </span>
             </div>
           </div>
-          <span className="font-cinzel text-2xl sm:text-3xl font-black text-[#F0D978] tabular-nums">
+          <span className="font-cinzel text-3xl sm:text-4xl font-black text-[#F0D978] tabular-nums self-end sm:self-auto">
             {hypeLevel}%
           </span>
         </div>
 
         {/* Thermometer Bar */}
-        <div className="relative w-full h-8 rounded-full bg-[#141A24] border border-[#D4AF37]/40 overflow-hidden shadow-inner p-1">
+        <div className="relative w-full h-9 rounded-full bg-[#141A24] border border-[#D4AF37]/40 overflow-hidden shadow-inner p-1.5">
           <motion.div
             className="h-full rounded-full"
             style={{
@@ -73,7 +73,7 @@ export default function HypeThermometer() {
           max={1000}
           value={hypeLevel}
           onChange={(e) => setHypeLevel(Number(e.target.value))}
-          className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[#F0D978] bg-[#1E293B]"
+          className="w-full h-3 rounded-lg appearance-none cursor-pointer accent-[#F0D978] bg-[#1E293B]"
         />
 
         {/* Dynamic Status Display */}
@@ -81,32 +81,34 @@ export default function HypeThermometer() {
           key={label.text}
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center pt-2 space-y-1.5"
+          className="text-center pt-2 space-y-3"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/50 shadow-md">
-            <StatusIcon className="w-4 h-4 text-[#F0D978]" />
-            <span className="font-cinzel text-sm sm:text-base font-bold gold-shimmer tracking-wider">
+          <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/50 shadow-md">
+            <StatusIcon className="w-5 h-5 text-[#F0D978]" />
+            <span className="font-cinzel text-base sm:text-lg font-bold gold-shimmer tracking-wider">
               {label.text}
             </span>
           </div>
-          <p className="font-jakarta text-xs sm:text-sm text-[#E2E8F0] font-medium max-w-md mx-auto">
+          <p className="font-jakarta text-sm sm:text-base text-[#E2E8F0] font-medium max-w-lg mx-auto leading-relaxed">
             {label.desc}
           </p>
         </motion.div>
       </div>
 
       {/* Mini-polls */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
         {/* Poll 1: Favorite Brother */}
-        <div className="p-6 rounded-3xl bg-[#0D1117] border border-white/10 space-y-4">
-          <div className="flex items-center gap-2.5 text-white">
-            <HelpCircle className="w-4 h-4 text-[#FDA4AF]" />
-            <h5 className="font-cinzel text-xs sm:text-sm font-bold tracking-wide">
+        <div className="p-8 sm:p-10 rounded-[26px] bg-[#0D1117] border border-white/10 space-y-6 shadow-xl">
+          <div className="flex items-center gap-3 text-white">
+            <div className="w-8 h-8 rounded-xl bg-[#FDA4AF]/20 border border-[#FDA4AF]/40 flex items-center justify-center shrink-0">
+              <HelpCircle className="w-4 h-4 text-[#FDA4AF]" />
+            </div>
+            <h5 className="font-cinzel text-sm sm:text-base font-bold tracking-wide">
               ¿Qué hermano Cash crees que te caerá mejor?
             </h5>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-4">
             {BROTHERS.map((b) => {
               const isSelected = cashBrother === b.id;
               const Icon = b.icon;
@@ -114,26 +116,26 @@ export default function HypeThermometer() {
                 <button
                   key={b.id}
                   onClick={() => setCashBrother(b.id)}
-                  className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
+                  className={`w-full flex items-center justify-between p-4 sm:p-5 rounded-2xl border text-left transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#D4AF37]/20 border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                      ? 'bg-[#D4AF37]/20 border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.25)]'
                       : 'bg-[#07070A]/60 border-white/10 hover:border-[#D4AF37]/40'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F0D978]">
-                      <Icon className="w-4 h-4" />
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F0D978] shrink-0">
+                      <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className="font-cinzel text-xs sm:text-sm font-bold text-white block">
+                      <span className="font-cinzel text-sm sm:text-base font-bold text-white block">
                         {b.name}
                       </span>
-                      <span className="font-jakarta text-[11px] text-[#CBD5E1]">
+                      <span className="font-jakarta text-xs text-[#CBD5E1] leading-relaxed block mt-0.5">
                         {b.desc}
                       </span>
                     </div>
                   </div>
-                  {isSelected && <CheckCircle className="w-4 h-4 text-[#F0D978] shrink-0" />}
+                  {isSelected && <CheckCircle className="w-5 h-5 text-[#F0D978] shrink-0 ml-2" />}
                 </button>
               );
             })}
@@ -141,31 +143,33 @@ export default function HypeThermometer() {
         </div>
 
         {/* Poll 2: The Biggest Liar */}
-        <div className="p-6 rounded-3xl bg-[#0D1117] border border-white/10 space-y-4">
-          <div className="flex items-center gap-2.5 text-white">
-            <HelpCircle className="w-4 h-4 text-[#FDA4AF]" />
-            <h5 className="font-cinzel text-xs sm:text-sm font-bold tracking-wide">
+        <div className="p-8 sm:p-10 rounded-[26px] bg-[#0D1117] border border-white/10 space-y-6 shadow-xl">
+          <div className="flex items-center gap-3 text-white">
+            <div className="w-8 h-8 rounded-xl bg-[#FDA4AF]/20 border border-[#FDA4AF]/40 flex items-center justify-center shrink-0">
+              <HelpCircle className="w-4 h-4 text-[#FDA4AF]" />
+            </div>
+            <h5 className="font-cinzel text-sm sm:text-base font-bold tracking-wide">
               ¿Cuál sospechas que es el más mentiroso?
             </h5>
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {LIARS.map((l) => {
               const isSelected = liar === l.id;
               return (
                 <button
                   key={l.id}
                   onClick={() => setLiar(l.id)}
-                  className={`flex items-center justify-between p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
+                  className={`flex items-center justify-between p-4 sm:p-5 rounded-2xl border text-left transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#881337]/35 border-[#FDA4AF] shadow-[0_0_15px_rgba(136,19,55,0.3)]'
+                      ? 'bg-[#881337]/35 border-[#FDA4AF] shadow-[0_0_20px_rgba(136,19,55,0.3)]'
                       : 'bg-[#07070A]/60 border-white/10 hover:border-[#FDA4AF]/40'
                   }`}
                 >
-                  <span className="font-cinzel text-xs font-bold text-white">
+                  <span className="font-cinzel text-sm font-bold text-white">
                     {l.name}
                   </span>
-                  {isSelected && <CheckCircle className="w-4 h-4 text-[#FDA4AF] shrink-0" />}
+                  {isSelected && <CheckCircle className="w-5 h-5 text-[#FDA4AF] shrink-0 ml-2" />}
                 </button>
               );
             })}

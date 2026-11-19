@@ -20,7 +20,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen py-20 overflow-hidden bg-[#07070A] flex items-center justify-center"
+      className="relative w-full min-h-screen py-24 sm:py-32 overflow-hidden bg-[#07070A] flex items-center justify-center"
     >
       {/* 3D Canvas — behind everything */}
       <div className="absolute inset-0 z-0">

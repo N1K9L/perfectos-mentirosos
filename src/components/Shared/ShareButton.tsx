@@ -77,19 +77,19 @@ export const ShareButton: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-lg glass-dark rounded-3xl p-6 sm:p-8 border border-[#D4AF37]/40 shadow-[0_20px_50px_rgba(0,0,0,0.9)] max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-xl glass-dark rounded-[28px] p-8 sm:p-10 border border-[#D4AF37]/40 shadow-[0_25px_60px_rgba(0,0,0,0.95)] max-h-[90vh] overflow-y-auto space-y-6"
             >
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-[#D4AF37]/20 pb-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 flex items-center justify-center text-[#F0D978]">
-                    <Sparkles className="w-4 h-4" />
+              <div className="flex items-center justify-between border-b border-[#D4AF37]/25 pb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#F0D978]">
+                    <Sparkles className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">
                       Sincronización a Distancia 💌
                     </h3>
-                    <p className="font-jakarta text-xs text-[#CBD5E1]">
+                    <p className="font-jakarta text-xs sm:text-sm text-[#CBD5E1]">
                       Comparte tus snacks, predicciones y hora con tu pareja
                     </p>
                   </div>
@@ -97,7 +97,7 @@ export const ShareButton: React.FC = () => {
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-white/10 text-[#CBD5E1] hover:text-white transition-colors"
+                  className="p-2 rounded-full hover:bg-white/10 text-[#CBD5E1] hover:text-white transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -105,31 +105,31 @@ export const ShareButton: React.FC = () => {
 
               {/* WhatsApp Summary Preview */}
               <div className="space-y-4">
-                <label className="block text-xs font-jakarta uppercase tracking-wider text-[#F0D978] font-bold">
+                <label className="block text-xs sm:text-sm font-jakarta uppercase tracking-wider text-[#F0D978] font-bold">
                   Vista Previa del Mensaje para WhatsApp:
                 </label>
-                <div className="p-4 rounded-xl bg-[#07070A] border border-[#D4AF37]/30 font-mono text-xs text-white whitespace-pre-wrap max-h-48 overflow-y-auto leading-relaxed">
+                <div className="p-5 rounded-2xl bg-[#07070A] border border-[#D4AF37]/35 font-mono text-xs sm:text-sm text-white whitespace-pre-wrap max-h-52 overflow-y-auto leading-relaxed shadow-inner">
                   {generateWhatsAppSummary()}
                 </div>
 
                 {/* Actions */}
-                <div className="space-y-3 pt-2">
+                <div className="space-y-4 pt-2">
                   <button
                     onClick={handleSendWhatsApp}
-                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-jakarta font-semibold text-sm shadow-[0_4px_15px_rgba(37,211,102,0.3)] transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-2xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-jakarta font-bold text-sm sm:text-base shadow-[0_4px_20px_rgba(37,211,102,0.35)] transition-all cursor-pointer"
                   >
                     <span>Abrir en WhatsApp Directo 💬</span>
                   </button>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <button
                       onClick={handleCopySummary}
-                      className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl glass border border-[#D4AF37]/30 hover:border-[#D4AF37] text-white text-xs font-jakarta font-medium transition-all cursor-pointer"
+                      className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl glass border border-[#D4AF37]/30 hover:border-[#D4AF37] text-white text-xs sm:text-sm font-jakarta font-semibold transition-all cursor-pointer"
                     >
                       {copiedSummary ? (
                         <>
                           <Check className="w-4 h-4 text-[#25D366]" />
-                          <span>¡Copiado!</span>
+                          <span>¡Copiado al Portapapeles!</span>
                         </>
                       ) : (
                         <>
@@ -141,7 +141,7 @@ export const ShareButton: React.FC = () => {
 
                     <button
                       onClick={handleCopyLink}
-                      className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl glass border border-[#D4AF37]/30 hover:border-[#D4AF37] text-white text-xs font-jakarta font-medium transition-all cursor-pointer"
+                      className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl glass border border-[#D4AF37]/30 hover:border-[#D4AF37] text-white text-xs sm:text-sm font-jakarta font-semibold transition-all cursor-pointer"
                     >
                       {copiedLink ? (
                         <>
@@ -158,7 +158,7 @@ export const ShareButton: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-[11px] text-[#64748B] text-center font-jakarta pt-2">
+                <p className="text-xs text-[#94A3B8] text-center font-jakarta pt-2 leading-relaxed">
                   ✨ El Link Mágico incluye un código especial con tus opciones seleccionadas para que al abrirlo se carguen idénticas.
                 </p>
               </div>

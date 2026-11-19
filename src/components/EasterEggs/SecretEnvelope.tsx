@@ -51,16 +51,16 @@ export const SecretEnvelope: React.FC<SecretEnvelopeProps> = ({
               animate={{ opacity: 1, scale: 1, y: -8 }}
               exit={{ opacity: 0, scale: 0.8, y: 5 }}
               transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-              className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-48 sm:w-56 glass-dark rounded-xl p-3 border border-[#D4AF37] shadow-[0_10px_25px_rgba(0,0,0,0.8)] z-30 pointer-events-auto"
+              className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-56 sm:w-72 glass-dark rounded-2xl p-4 sm:p-5 border border-[#D4AF37] shadow-[0_15px_35px_rgba(0,0,0,0.9)] z-30 pointer-events-auto space-y-2"
             >
-              <div className="flex items-center gap-1.5 mb-1 text-[#FDA4AF] text-[10px] uppercase font-jakarta tracking-wider">
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                <span>Nota Secreta</span>
+              <div className="flex items-center gap-2 text-[#FDA4AF] text-[11px] uppercase font-jakarta tracking-wider font-semibold">
+                <Sparkles className="w-3.5 h-3.5 text-[#F0D978]" />
+                <span>Nota Secreta Confidencial</span>
               </div>
-              <p className="font-playfair text-xs sm:text-sm text-white italic leading-snug">
+              <p className="font-playfair text-sm text-white italic leading-relaxed">
                 "{message}"
               </p>
-              <div className="mt-1.5 text-right font-cinzel text-[10px] text-[#D4AF37]">
+              <div className="text-right font-cinzel text-xs text-[#F0D978] font-bold">
                 — Nikol 💛
               </div>
             </motion.div>

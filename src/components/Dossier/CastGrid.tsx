@@ -102,7 +102,7 @@ const itemVariants = {
 export default function CastGrid() {
   return (
     <motion.div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center max-w-6xl mx-auto pt-4"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-14 justify-items-center max-w-6xl mx-auto pt-8"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

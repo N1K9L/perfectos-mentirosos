@@ -23,7 +23,7 @@ const TimelineMonth: React.FC<TimelineMonthProps> = ({
 
   return (
     <div
-      className={`timeline-month relative flex items-center w-full mb-20 md:mb-28 ${
+      className={`timeline-month relative flex items-center w-full mb-28 md:mb-36 ${
         isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
       } flex-row`}
     >
@@ -50,11 +50,11 @@ const TimelineMonth: React.FC<TimelineMonthProps> = ({
       <div
         ref={cardRef}
         className={`timeline-card ml-16 md:ml-0 md:w-1/2 ${
-          isLeft ? 'md:pr-16' : 'md:pl-16'
+          isLeft ? 'md:pr-20' : 'md:pl-20'
         }`}
       >
         <div
-          className={`luxury-card rounded-3xl p-7 sm:p-9 relative overflow-hidden transition-all duration-300 hover:scale-[1.01] group border-2 ${
+          className={`luxury-card rounded-[28px] p-8 sm:p-11 md:p-12 relative overflow-hidden transition-all duration-300 hover:scale-[1.01] group border-2 ${
             isSpecial
               ? 'border-[#881337] hover:border-[#FDA4AF] shadow-[0_0_35px_rgba(136,19,55,0.3)]'
               : 'border-[#D4AF37]/30 hover:border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.12)]'
@@ -62,13 +62,13 @@ const TimelineMonth: React.FC<TimelineMonthProps> = ({
         >
           {/* Ambient Glow */}
           {isSpecial && (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#881337]/20 via-transparent to-[#D4AF37]/10 pointer-events-none rounded-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#881337]/20 via-transparent to-[#D4AF37]/10 pointer-events-none rounded-[28px]" />
           )}
 
           {/* Top Category Badge */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-5">
             <span
-              className={`text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full ${
+              className={`text-[11px] font-jakarta font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ${
                 isSpecial
                   ? 'bg-[#881337]/50 text-[#FDA4AF] border border-[#FDA4AF]/40'
                   : 'bg-[#D4AF37]/15 text-[#F0D978] border border-[#D4AF37]/35'
@@ -88,7 +88,7 @@ const TimelineMonth: React.FC<TimelineMonthProps> = ({
 
           {/* Title */}
           <h3
-            className={`font-cinzel text-xl sm:text-2xl font-black mb-3 tracking-wide ${
+            className={`font-cinzel text-2xl sm:text-3xl font-black mb-4 tracking-wide ${
               isSpecial ? 'text-[#FDA4AF]' : 'text-white group-hover:text-[#F0D978]'
             } transition-colors`}
           >
@@ -96,7 +96,7 @@ const TimelineMonth: React.FC<TimelineMonthProps> = ({
           </h3>
 
           {/* Description — Crisp & Readable */}
-          <p className="font-jakarta text-sm sm:text-base text-[#F1F5F9] leading-relaxed font-normal">
+          <p className="font-jakarta text-base sm:text-lg text-[#F1F5F9] leading-relaxed sm:leading-loose font-normal">
             {description}
           </p>
         </div>

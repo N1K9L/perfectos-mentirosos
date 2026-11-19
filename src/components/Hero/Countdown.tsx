@@ -65,35 +65,35 @@ export default function Countdown() {
       </div>
 
       {/* Countdown Cards */}
-      <div className="flex items-center justify-center gap-2.5 sm:gap-4 w-full">
+      <div className="flex items-center justify-center gap-3 sm:gap-6 w-full">
         {units.map((unit, idx) => (
-          <div key={unit.label} className="flex items-center gap-2.5 sm:gap-4">
-            <div className="flex flex-col items-center">
+          <div key={unit.label} className="flex items-center gap-3 sm:gap-6">
+            <div className="flex flex-col items-center space-y-2.5">
               {/* Luxury Digital Card */}
-              <div className="relative w-16 h-20 sm:w-24 sm:h-28 rounded-2xl overflow-hidden border border-[#D4AF37]/50 shadow-[0_10px_25px_rgba(0,0,0,0.8),0_0_20px_rgba(212,175,55,0.15)] bg-gradient-to-b from-[#141A24] via-[#0D1117] to-[#07070A] group">
+              <div className="relative w-18 h-24 sm:w-28 sm:h-32 rounded-3xl overflow-hidden border border-[#D4AF37]/50 shadow-[0_12px_30px_rgba(0,0,0,0.85),0_0_25px_rgba(212,175,55,0.2)] bg-gradient-to-b from-[#141A24] via-[#0D1117] to-[#07070A] group">
                 {/* Horizontal split groove */}
-                <div className="absolute top-1/2 left-0 right-0 h-px bg-[#D4AF37]/20 z-10" />
+                <div className="absolute top-1/2 left-0 right-0 h-px bg-[#D4AF37]/25 z-10" />
 
                 {/* Top glossy reflection */}
                 <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
 
                 {/* Numerical display */}
                 <div className="relative z-20 w-full h-full flex items-center justify-center">
-                  <span className="font-cinzel text-3xl sm:text-5xl font-extrabold text-[#F0D978] drop-shadow-[0_2px_10px_rgba(212,175,55,0.5)] tabular-nums">
+                  <span className="font-cinzel text-3xl sm:text-5xl font-black text-[#F0D978] drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] tabular-nums">
                     {String(unit.value).padStart(2, '0')}
                   </span>
                 </div>
               </div>
 
               {/* High Contrast Label */}
-              <span className="mt-2 font-jakarta text-[11px] sm:text-xs font-bold text-[#E2E8F0] uppercase tracking-[0.2em]">
+              <span className="font-jakarta text-[11px] sm:text-xs font-bold text-[#E2E8F0] uppercase tracking-[0.2em]">
                 {unit.label}
               </span>
             </div>
 
             {/* Glowing Colon */}
             {idx < units.length - 1 && (
-              <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#D4AF37] -mt-6 animate-pulse select-none">
+              <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#D4AF37] -mt-8 animate-pulse select-none">
                 :
               </span>
             )}

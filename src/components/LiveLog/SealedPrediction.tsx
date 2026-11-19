@@ -35,38 +35,38 @@ export default function SealedPrediction({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: revealDelay, duration: 0.5 }}
-      className="relative rounded-2xl p-5 overflow-hidden border border-[#D4AF37]/40 shadow-xl bg-gradient-to-br from-[#10141D] to-[#0A0D12]"
+      className="relative rounded-2xl p-6 sm:p-7 overflow-hidden border border-[#D4AF37]/40 shadow-xl bg-gradient-to-br from-[#10141D] to-[#0A0D12] space-y-4"
       style={{
         transform: `rotate(${rotation}deg)`,
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2.5">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-cinzel text-[#F0D978] font-bold tracking-wider uppercase">
+      <div className="flex items-center justify-between border-b border-white/10 pb-3">
+        <div className="flex items-center gap-2.5">
+          <span className="text-xs sm:text-sm font-cinzel text-[#F0D978] font-bold tracking-wider uppercase">
             {DETECTIVE_LABELS[prediction.detective]}
           </span>
           <span className="text-xs text-white/30">•</span>
-          <span className="text-xs text-[#FDA4AF] font-jakarta font-semibold">
+          <span className="text-xs sm:text-sm text-[#FDA4AF] font-jakarta font-semibold">
             {TIMING_LABELS[prediction.timing]}
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-[#CBD5E1] font-mono font-medium">
+        <div className="flex items-center gap-2.5">
+          <span className="text-xs sm:text-sm text-[#CBD5E1] font-mono font-medium">
             {formattedTime}
           </span>
           {prediction.sealed ? (
-            <Lock className="w-3.5 h-3.5 text-[#FDA4AF]" />
+            <Lock className="w-4 h-4 text-[#FDA4AF]" />
           ) : (
-            <Unlock className="w-3.5 h-3.5 text-[#F0D978]" />
+            <Unlock className="w-4 h-4 text-[#F0D978]" />
           )}
         </div>
       </div>
 
       {/* Prediction text */}
-      <div className="relative my-2">
+      <div className="relative py-2">
         <p
-          className={`font-jakarta text-sm sm:text-base leading-relaxed text-white font-medium transition-all duration-700 ${
+          className={`font-jakarta text-base sm:text-lg leading-relaxed text-white font-medium transition-all duration-700 ${
             prediction.sealed ? 'sealed-text select-none' : 'sealed-text revealed'
           }`}
         >
@@ -74,11 +74,11 @@ export default function SealedPrediction({
         </p>
 
         {prediction.sealed && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 pointer-events-none">
-            <div className="w-9 h-9 rounded-full bg-[#881337] border border-[#F0D978] flex items-center justify-center shadow-[0_0_15px_rgba(136,19,55,0.8)]">
-              <span className="text-xs">🔒</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pointer-events-none">
+            <div className="w-10 h-10 rounded-full bg-[#881337] border border-[#F0D978] flex items-center justify-center shadow-[0_0_20px_rgba(136,19,55,0.8)]">
+              <span className="text-sm">🔒</span>
             </div>
-            <span className="font-cinzel text-[10px] text-[#F0D978] font-black uppercase tracking-widest bg-[#07070A]/80 px-2 py-0.5 rounded border border-[#D4AF37]/30">
+            <span className="font-cinzel text-xs text-[#F0D978] font-black uppercase tracking-widest bg-[#07070A]/85 px-3 py-1 rounded-full border border-[#D4AF37]/40">
               EXPEDIENTE CENSURADO
             </span>
           </div>
@@ -87,33 +87,33 @@ export default function SealedPrediction({
 
       {/* Footer / Scoring */}
       {!prediction.sealed && (
-        <div className="pt-3 border-t border-white/10 mt-3">
+        <div className="pt-4 border-t border-white/10">
           {prediction.correct === null ? (
-            <div className="flex gap-2.5">
+            <div className="flex gap-3">
               <button
                 onClick={() => onScore(prediction.id, true)}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold font-jakarta bg-[#22C55E]/20 border border-[#22C55E]/60 text-[#22C55E] hover:bg-[#22C55E]/30 transition-all cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold font-jakarta bg-[#22C55E]/20 border border-[#22C55E]/60 text-[#22C55E] hover:bg-[#22C55E]/30 transition-all cursor-pointer"
               >
-                <CheckCircle className="w-3.5 h-3.5" />
+                <CheckCircle className="w-4 h-4" />
                 <span>Le atiné ✅</span>
               </button>
               <button
                 onClick={() => onScore(prediction.id, false)}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold font-jakarta bg-[#EF4444]/20 border border-[#EF4444]/60 text-[#EF4444] hover:bg-[#EF4444]/30 transition-all cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold font-jakarta bg-[#EF4444]/20 border border-[#EF4444]/60 text-[#EF4444] hover:bg-[#EF4444]/30 transition-all cursor-pointer"
               >
-                <XCircle className="w-3.5 h-3.5" />
+                <XCircle className="w-4 h-4" />
                 <span>Fallé ❌</span>
               </button>
             </div>
           ) : (
             <div
-              className={`text-center py-2 rounded-xl text-xs font-bold font-jakarta border ${
+              className={`text-center py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold font-jakarta border ${
                 prediction.correct
                   ? 'bg-[#22C55E]/15 border-[#22C55E]/50 text-[#22C55E]'
                   : 'bg-[#EF4444]/15 border-[#EF4444]/50 text-[#EF4444]'
               }`}
             >
-              {prediction.correct ? '🏆 ¡Predicción Correcta!' : '💥 Teoría Descartada'}
+              {prediction.correct ? '🏆 ¡Predicción Correcta! (+1 punto)' : '💥 Teoría Descartada'}
             </div>
           )}
         </div>

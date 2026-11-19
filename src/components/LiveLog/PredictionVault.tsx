@@ -105,11 +105,11 @@ export default function PredictionVault({
 
   if (predictions.length === 0) {
     return (
-      <div className="text-center py-12 p-6 rounded-2xl bg-[#0D1117] border border-white/10">
-        <p className="font-playfair text-lg text-[#FDA4AF] italic">
+      <div className="text-center py-16 p-8 rounded-[26px] bg-[#0D1117] border border-white/10 space-y-3">
+        <p className="font-playfair text-xl sm:text-2xl text-[#FDA4AF] italic">
           Aún no hay predicciones selladas en la bóveda...
         </p>
-        <p className="font-jakarta text-xs text-[#CBD5E1] mt-2">
+        <p className="font-jakarta text-xs sm:text-sm text-[#CBD5E1] max-w-md mx-auto leading-relaxed">
           Escribe tu primera sospecha en el formulario de arriba y pulsa "Sellar Predicción" 🔮
         </p>
       </div>
@@ -117,22 +117,24 @@ export default function PredictionVault({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Vault Status Header */}
-      <div className="flex items-center justify-between p-4 rounded-2xl bg-[#0D1117] border border-[#D4AF37]/30">
-        <div className="flex items-center gap-2">
-          <Lock className="w-4 h-4 text-[#F0D978]" />
-          <span className="font-cinzel text-xs sm:text-sm font-bold text-white tracking-wider">
-            BÓVEDA DE EXPEDIENTES
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-[#0D1117] border border-[#D4AF37]/35 shadow-lg">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F0D978]">
+            <Lock className="w-4 h-4" />
+          </div>
+          <span className="font-cinzel text-sm sm:text-base font-bold text-white tracking-wider">
+            BÓVEDA DE EXPEDIENTES CLASIFICADOS
           </span>
         </div>
-        <span className="font-jakarta text-xs font-bold text-[#F0D978] bg-[#D4AF37]/15 px-3 py-1 rounded-full border border-[#D4AF37]/40">
+        <span className="font-jakarta text-xs sm:text-sm font-bold text-[#F0D978] bg-[#D4AF37]/15 px-4 py-1.5 rounded-full border border-[#D4AF37]/40 w-fit">
           {sealedCount} {sealedCount === 1 ? 'sellada' : 'selladas'} / {predictions.length} total
         </span>
       </div>
 
       {/* Prediction Cards Grid */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {predictions.map((prediction, index) => (
           <SealedPrediction
             key={prediction.id}
