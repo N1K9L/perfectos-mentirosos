@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-deep: #07070A;
+  --color-bg-midnight: #0F172A;
+  --color-bg-card: #0D1117;
+  --color-bg-card-hover: #161B22;
+  --color-gold: #D4AF37;
+  --color-gold-light: #F0D978;
+  --color-gold-dark: #A88A2A;
+  --color-crimson: #881337;
+  --color-crimson-light: #BE185D;
+  --color-rose-soft: #FDA4AF;
+  --color-rose-glow: #FB7185;
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+  --color-border-subtle: #1E293B;
+  --color-border-gold: #D4AF3740;
+
+  --font-cinzel: 'Cinzel', serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-jakarta);
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dark);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-bg-deep);
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-jakarta {
+  font-family: var(--font-jakarta);
+}
+
+/* Gold shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold-light) 25%,
+    var(--color-gold) 50%,
+    var(--color-gold-light) 75%,
+    var(--color-gold-dark) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-border-shimmer {
+  position: relative;
+}
+
+.gold-border-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-dark),
+    var(--color-gold-light),
+    var(--color-gold),
+    var(--color-gold-light),
+    var(--color-gold-dark)
+  );
+  background-size: 200% 200%;
+  animation: shimmer 4s linear infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+/* Wax seal animation */
+@keyframes sealPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(136, 19, 55, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(136, 19, 55, 0.8), 0 0 50px rgba(212, 175, 55, 0.3); }
+}
+
+.wax-seal {
+  animation: sealPulse 2s ease-in-out infinite;
+}
+
+/* Blur reveal for predictions */
+.sealed-text {
+  filter: blur(8px);
+  user-select: none;
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sealed-text.revealed {
+  filter: blur(0);
+  user-select: auto;
+}
+
+/* Holographic effect for VIP ticket */
+@keyframes holoShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.holographic {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.1) 0%,
+    rgba(136, 19, 55, 0.1) 25%,
+    rgba(212, 175, 55, 0.2) 50%,
+    rgba(190, 24, 93, 0.1) 75%,
+    rgba(212, 175, 55, 0.1) 100%
+  );
+  background-size: 400% 400%;
+  animation: holoShift 6s ease infinite;
+}
+
+/* Particle float */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(13, 17, 23, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.glass-dark {
+  background: rgba(7, 7, 10, 0.8);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(30, 41, 59, 0.5);
+}
